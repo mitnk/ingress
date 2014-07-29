@@ -1,0 +1,33 @@
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+a:hover {text-decoration: underline;}
+a:active {text-decoration: underline;}
+
+h1 {font-size:1.4em;}
+
+.c-E {color: green !important;}
+.c-R {color: blue !important;}
+
+.card {
+    background:#CCC;
+    border:1px solid #AAA;
+    border-bottom:3px solid #BBB;
+    padding-top:20px;
+    padding-bottom:20px;
+    margin:15px;
+    overflow:hidden;
+    text-align: center;
+}
+
+.card h1 {
+    padding: 0;
+    margin: 0;
+    font-size: 22px !important;
+}
+
+.card p {
+    font-size: 42px;
+    padding: 18px;
+    margin: 18px;
+    color: green;
+}
