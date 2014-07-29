@@ -37,6 +37,24 @@ make && sudo make install
 Usage
 -----
 
+1. 创建一个 `settings_local.py` 文件（与`settings.py`同目录）
+
+2. 在Intel里登录自己的Ingress账号（最好是小号），然后用Chrome的Inspect Element
+功能查看请求 `POST /r/getPlexts` 的Request Header 里找步骤3里需要的值
+
+3. 在 `settings_local.py` 里填写好以下值
+
+```
+INGRESS_INTEL_COOKIE = ""
+INGRESS_INTEL_CSRF_TOKEN = ""
+INGRESS_INTEL_PAYLOAD_V = ""
+```
+
+
+然后就可以测试使用了：
+
 `python3 manage.py test_collect`
+
+如果输出是些 JSON 结构、说明测试成功，否则继续做好1、2、3步里的操作。
 
 Use `python3 manage.py help` to see other ingress commands.
