@@ -3,3 +3,5 @@
 *.log
 *.png
 settings_local.py
+map
+map/

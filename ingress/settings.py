@@ -90,6 +90,6 @@ STATIC_URL = '/static/'
 GOOGLE_APP_SECRET_KEY = 'xxx'
 BAIDU_APP_SECRET_KEY = 'xxx'
 
-DIR_PORTAL_MAPS = os.path.join(BASE_DIR, 'media/img/map/')
+DIR_PORTAL_MAPS = os.path.join(BASE_DIR, 'ingress/media/img/map/')
 
 from .settings_local import *

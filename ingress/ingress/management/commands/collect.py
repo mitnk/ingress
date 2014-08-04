@@ -10,13 +10,23 @@ _D = {
 }
 
 
+def get_n_seconds_ago(n):
+    return int(time.time() * 1000 - n * 1000)
+
+
 def get_timems_last_minute():
+    one_hour_ago = get_n_seconds_ago(3600)
     try:
-        max_timems = Action.objects.order_by('-timestamp')[0].timestamp
-        min_timems = _D['min_timems']
-        return min_timems if min_timems > max_timems else max_timems
+        # we must +1 for this, since sometimes a lot of items with same timestamp
+        # so that we got endless loop then.
+        max_timems = Action.objects.order_by('-timestamp')[0].timestamp + 1
+        if one_hour_ago > max_timems:
+            return one_hour_ago
+        elif _D['min_timems'] > max_timems:
+            return _D['min_timems']
+        return max_timems
     except:
-        return int(time.time() * 1000 - 80 * 1000)
+        return one_hour_ago
 
 
 def get_or_create_portal(portal):
@@ -46,10 +56,13 @@ class Command(BaseCommand):
             return
 
         timems = get_timems_last_minute()
-        print('===', timems)
+        print('==={} ({:.0f} seconds ago)'.format(timems, time.time() - (timems / 1000)))
+
         plexts = utils.get_plexts(timems)
         if 'success' not in plexts:
+            print('Error in get_plexts()')
             return
+
         for item in plexts['success']:
             action = {
                 'guid': item[0],
