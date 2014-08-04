@@ -168,6 +168,10 @@ class Command(BaseCommand):
             except Player.DoesNotExist:
                 obj_player = Player.objects.create(**player)
 
+            if resonator >= 8:
+                obj_player.over_lv8 = True
+                obj_player.save()
+
             if not Action.objects.filter(pk=action['guid']).exists():
                 action['player'] = obj_player
                 action['portal'] = obj_portal

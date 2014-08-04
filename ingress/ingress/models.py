@@ -37,6 +37,7 @@ class Player(models.Model):
     id = models.CharField(max_length=40, primary_key=True)
     team = models.CharField(max_length=1)
     portal_count = models.IntegerField(default=0)
+    over_lv8 = models.BooleanField(default=False)
     added = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
