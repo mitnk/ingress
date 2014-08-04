@@ -193,9 +193,7 @@ class Command(BaseCommand):
             print(info)
 
         ps = Portal.objects.all()
-        print(ps.count())
         ps = Action.objects.all()
-        print(ps.count())
 
         if len(plexts['success']) >= 50:
             self.handle(*args, **options)
