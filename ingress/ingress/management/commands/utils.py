@@ -8,7 +8,7 @@ from django.conf import settings
 just_now = int((time.time() - 20) * 1000)
 
 payload = {
-    "minLatE6": 39620499,
+    "minLatE6": 39601049,
     "minLngE6": 115792723,
     "maxLatE6": 40403039,
     "maxLngE6": 117009459,
