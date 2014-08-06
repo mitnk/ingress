@@ -15,7 +15,7 @@ def get_n_seconds_ago(n):
 
 
 def get_timems_last_minute():
-    one_hour_ago = get_n_seconds_ago(3600)
+    one_hour_ago = get_n_seconds_ago(60 * 60)
     try:
         # we must +1 for this, since sometimes a lot of items with same timestamp
         # so that we got endless loop then.
@@ -52,7 +52,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         _D['_'] += 1
-        if _D['_'] > 10:
+        if _D['_'] > 4:
             return
 
         timems = get_timems_last_minute()
@@ -61,6 +61,7 @@ class Command(BaseCommand):
         plexts = utils.get_plexts(timems)
         if 'success' not in plexts:
             print('Error in get_plexts()')
+            print(plexts)
             return
 
         for item in plexts['success']:

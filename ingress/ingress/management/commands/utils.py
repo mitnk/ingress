@@ -8,10 +8,10 @@ from django.conf import settings
 just_now = int((time.time() - 20) * 1000)
 
 payload = {
-    "minLatE6": 39410957,
-    "minLngE6": 114544889,
-    "maxLatE6": 40463887,
-    "maxLngE6": 118250028,
+    "minLatE6": 39620499,
+    "minLngE6": 115792723,
+    "maxLatE6": 40403039,
+    "maxLngE6": 117009459,
     "minTimestampMs": just_now,
     "maxTimestampMs": -1,
     "tab": "all",
