@@ -37,6 +37,10 @@ HEADERS = {
 def get_plexts(timems):
     payload.update({'minTimestampMs': timems})
     r = requests.post("https://www.ingress.com/r/getPlexts", data=json.dumps(payload), headers=HEADERS)
+    if r.status_code != 200:
+        print('Got Error Http Code: {}'.format(r.status_code))
+        return {}
+
     try:
         return json.loads(r.text)
     except:
