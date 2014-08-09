@@ -1,4 +1,6 @@
+import datetime
 from django.db import models
+from django.utils.timezone import now
 
 
 class Portal(models.Model):
@@ -53,6 +55,30 @@ class Action(models.Model):
     portal_to = models.ForeignKey('Portal', null=True, blank=True, related_name='portal_to')
     timestamp = models.BigIntegerField()
     added = models.DateTimeField(auto_now_add=True)
+
+    def hour_minute(self):
+        d = datetime.datetime.utcfromtimestamp(self.timestamp // 1000)
+        span =  now().replace(tzinfo=None) - d
+        days = span.days
+        seconds = span.seconds
+        if days >= 6:
+            return d.strftime('%Y-%m-%d')
+        elif days > 1:
+            return '{} days ago'.format(days)
+        elif days == 1:
+            return '1 day ago'
+        elif seconds >= 3600 * 2:
+            return '{} hours ago'.format(seconds // 3600)
+        elif seconds >= 3600:
+            return '1 hour ago'
+        elif seconds >= 60 * 2:
+            return '{} mins ago'.format(seconds // 60)
+        elif seconds >= 60:
+            return '1 min ago'
+        elif seconds > 1:
+            return '{} secs ago'.format(seconds)
+        else:
+            return '1 sec ago'
 
 
 class MU(models.Model):

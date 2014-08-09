@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="/media/css/pure-min.css">
     <link rel="stylesheet" href="/media/css/ingress.css?v=14080501">
     <title>{% block title %}{% endblock %} | Ingress Beijing</title>
     {% block meta %}{% endblock %}
@@ -27,6 +27,7 @@
 </div>
 
 
+{% if not debug %}
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -36,5 +37,7 @@
     ga('create', 'UA-53179716-1', 'auto');
     ga('send', 'pageview');
 </script>
+{% endif %}
+
 </body>
 </html>

@@ -5,7 +5,7 @@ Ingress Beijing
 Requirements
 
 - Python 3.4+
-- Django 1.7+
+- Django 1.7rc1+
 
 - psycopg2
 - requests

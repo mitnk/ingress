@@ -25,6 +25,9 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
 
 
 # Application definition
@@ -86,6 +89,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "ingress/media/")
 
 GOOGLE_APP_SECRET_KEY = 'xxx'
 BAIDU_APP_SECRET_KEY = 'xxx'
