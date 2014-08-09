@@ -37,7 +37,7 @@ class Portal(models.Model):
             name, rarity, owner = s.split('+')
             result.append({
                 'name': name,
-                'rarity': rarity.replace(' ', '-'),
+                'rarity': rarity.replace(' ', '_'),
                 'owner': owner,
             })
         while len(result) < 4:
