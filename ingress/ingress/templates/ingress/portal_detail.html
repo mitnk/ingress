@@ -1,5 +1,8 @@
 {% extends "ingress/base.html" %}
 {% block title %}{{ portal.name }} on Map{% endblock %}
+{% block meta %}
+    <link rel="stylesheet" href="/media/css/cbracco.css">
+{% endblock %}
 
 
 {% block content %}
@@ -55,9 +58,9 @@
                     <div class="pure-u-23-24">
                     {% endif %}
 
-                    <div class="bg-{% if x.owner %}{{portal.team}}{% else %}N{% endif %} cell-reso c-L{{ x.level }}">
+                    <div data-tooltip="{{ x.owner }}" class="bg-{% if x.owner %}{{portal.team}}{% else %}N{% endif %} cell-reso c-L{{ x.level }} {% if forloop.counter > 4 %} tooltip-bottom{% endif %}">
                         {% if x.owner %}
-                        <span title="{{ x.owner }}">L{{ x.level }}</span>
+                        <span>L{{ x.level }}</span>
                         {% endif %}
                     </div>
 
@@ -82,8 +85,8 @@
         </div>
         <div class="pure-u-20-24 sec-mod">
             {% for x in portal.mod_list %}
-                <div class="bg-mod-{{ x.rarity|lower }} cell-mod">
-                    <span title="{{ x.owner }}">{{ x.name }}</span>
+                <div {% if x.owner %}data-tooltip="{{ x.owner }}"{% endif %} class="bg-mod-{{ x.rarity|lower }} cell-mod">
+                    <span>{{ x.name }}</span>
                 </div>
             {% endfor %}
         </div>
