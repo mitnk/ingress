@@ -15,16 +15,20 @@
         </div>
     </div>
 
-    {% if portal.level > 0 %}
     <div class="pure-g mb-30">
         <div class="pure-u-1-8">
             <div>Owner</div>
         </div>
         <div class="pure-u-20-24 cell-portal-owner">
+        {% if portal.level > 0 %}
             <span class="c-{{ portal.team }}">{{ portal.owner }}</span>
+        {% else %}
+            <span class="c-{{ portal.team }}">NEUTURAL</span>
+        {% endif %}
         </div>
     </div>
 
+    {% if portal.level > 0 %}
     <div class="pure-g mb-20">
         <div class="pure-u-1-8">
             <div>Level</div>
@@ -33,7 +37,9 @@
             <span class=" c-L{{ portal.level }}">L{{ portal.level }}</span>
         </div>
     </div>
+    {% endif %}
 
+    {% if portal.level > 0 %}
     <div class="pure-g">
         <div class="pure-u-1-8">
             <div class="reso-header">Res.</div>
