@@ -20,10 +20,10 @@
             <div>Owner</div>
         </div>
         <div class="pure-u-20-24 cell-portal-owner">
-        {% if portal.level > 0 %}
+        {% if portal.owner %}
             <span class="c-{{ portal.team }}">{{ portal.owner }}</span>
         {% else %}
-            <span class="c-{{ portal.team }}">NEUTURAL</span>
+            <span class="c-N">NEUTURAL</span>
         {% endif %}
         </div>
     </div>
