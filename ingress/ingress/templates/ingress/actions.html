@@ -11,11 +11,11 @@
 <h1>Latest 100 Actions{% if portal %} on {{ portal.name }}{% endif %}</h1>
 
 {% if portal.updated %}
-    <a href="/maps/{{ portal.guid }}/" target="_blank">View Details of {{ portal.name }}</a>
+    <a href="/portals/{{ portal.guid }}/" target="_blank">View Details of {{ portal.name }}</a>
     <br>
     <br>
 {% elif portal.has_maps %}
-    <a href="/maps/{{ portal.guid }}/" target="_blank">View {{ portal.name }} on Map</a>
+    <a href="/portals/{{ portal.guid }}/" target="_blank">View {{ portal.name }} on Map</a>
     <br>
     <br>
 {% endif %}
