@@ -10,11 +10,14 @@
 
 <h1>Latest 100 Actions{% if portal %} on {{ portal.name }}{% endif %}</h1>
 
-{% if portal.has_maps %}
-<a href="/maps/{{ portal.guid }}/" target="_blank">View {{ portal.name }} on Map</a>
-<br>
-<br>
+{% if portal.updated %}
+    <a href="/maps/{{ portal.guid }}/" target="_blank">View Details of {{ portal.name }}</a>
+{% elif portal.has_maps %}
+    <a href="/maps/{{ portal.guid }}/" target="_blank">View {{ portal.name }} on Map</a>
+    <br>
+    <br>
 {% endif %}
+
 <table class="pure-table pure-table-bordered">
     <thead>
     <tr>
