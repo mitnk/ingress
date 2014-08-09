@@ -7,7 +7,7 @@
     <h1>{{ portal.name }} on Map</h1>
 
 
-    {% if portal.updated %}
+{% if portal.updated %}
 
     <div class="pure-g">
         <div class="pure-u-23-24 mb-30">
@@ -15,6 +15,7 @@
         </div>
     </div>
 
+    {% if portal.level > 0 %}
     <div class="pure-g mb-30">
         <div class="pure-u-1-8">
             <div>Owner</div>
@@ -66,8 +67,9 @@
             {% endif %}
         </div>
     </div>
+    {% endif %} {# endif of portal.level > 0 #}
 
-
+    {% if portal.mod_status %}
     <div class="pure-g">
         <div class="pure-u-1-8">
             <div class="reso-header">Mods</div>
@@ -80,8 +82,9 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %} {# endif of portal.mod_status #}
 
-    {% endif %}
+{% endif %} {# endif of portal.updated #}
 
 
     <div class="pure-g">
