@@ -100,5 +100,8 @@ def search(request):
 
 def maps(request, guid):
     context = {}
-    context['portal'] = Portal.objects.get(guid=guid)
+    try:
+        context['portal'] = Portal.objects.get(guid=guid)
+    except Portal.DoesNotExist:
+        raise Http404()
     return render(request, "ingress/maps.html", context)
