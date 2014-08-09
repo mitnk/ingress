@@ -1,6 +1,8 @@
+import logging
 import time
 from django.core.management.base import BaseCommand
 from ingress.ingress.models import Portal, Action, Player, MU, Message
+from ingress.ingress.utils import within_range
 from . import utils
 
 
@@ -30,6 +32,12 @@ def get_timems_last_minute():
 
 
 def get_or_create_portal(portal):
+    latE6=portal['latE6']
+    lngE6=portal['lngE6']
+    if not within_range(latE6, lngE6):
+        logging.info('found a stranger protal, ignored')
+        return None
+
     try:
         obj_portal = Portal.objects.get(pk=portal['guid'])
         if obj_portal.team != portal['team'][0]:
@@ -153,6 +161,9 @@ class Command(BaseCommand):
                 continue
 
             obj_portal = get_or_create_portal(portal)
+            if obj_portal is None:
+                continue
+
             if action['name'] == 'captured':
                 obj_portal.owner = player['id']
                 obj_portal.save()

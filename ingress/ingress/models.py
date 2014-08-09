@@ -29,6 +29,9 @@ class Portal(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_mod_count(self):
+        return self.mod_status.count('|')
+
     def get_lat(self):
         return '{:.6f}'.format(self.latE6 / 1000000)
 
