@@ -19,7 +19,7 @@ payload = {
     "v": settings.INGRESS_INTEL_PAYLOAD_V,
 }
 
-headers = {
+HEADERS = {
     "accept": "*/*",
     "accept-encoding": "gzip,deflate,sdch",
     "accept-language": "en-US,en;q=0.8,zh-TW;q=0.6",
@@ -36,7 +36,7 @@ headers = {
 
 def get_plexts(timems):
     payload.update({'minTimestampMs': timems})
-    r = requests.post("https://www.ingress.com/r/getPlexts", data=json.dumps(payload), headers=headers)
+    r = requests.post("https://www.ingress.com/r/getPlexts", data=json.dumps(payload), headers=HEADERS)
     try:
         return json.loads(r.text)
     except:

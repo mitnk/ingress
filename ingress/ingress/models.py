@@ -13,6 +13,17 @@ class Portal(models.Model):
     rlat = models.CharField(max_length=24, default='')
     rlng = models.CharField(max_length=24, default='')
     has_maps = models.BooleanField(default=False)
+
+    level = models.IntegerField(default=0)
+    image = models.CharField(max_length=255, default='')
+    image_fetched = models.BooleanField(default=False)
+
+    mod_status = models.CharField(max_length=512, default='')
+    res_count = models.IntegerField(default=0)
+    res_status = models.CharField(max_length=512, default='')
+    health = models.IntegerField(default=0)
+    updated = models.DateTimeField(null=True)
+
     added = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
