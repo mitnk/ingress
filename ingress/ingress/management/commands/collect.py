@@ -35,7 +35,7 @@ def get_or_create_portal(portal):
     latE6=portal['latE6']
     lngE6=portal['lngE6']
     if not within_range(latE6, lngE6):
-        logging.info('found a stranger protal, ignored')
+        logging.info('found a stranger portal, ignored')
         return None
 
     try:

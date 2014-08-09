@@ -29,8 +29,34 @@ class Portal(models.Model):
     def __unicode__(self):
         return self.name
 
-    def get_mod_count(self):
-        return self.mod_status.count('|')
+    def mod_list(self):
+        result = []
+        for s in self.mod_status.split('|'):
+            if not s:
+                break
+            name, rarity, owner = s.split('+')
+            result.append({
+                'name': name,
+                'rarity': rarity.replace(' ', '_'),
+                'owner': owner,
+            })
+        while len(result) < 4:
+            result.append({'rarity': 'empty'})
+        return result
+
+    def resolator_list(self):
+        result = []
+        for s in self.res_status.split('|'):
+            if not s:
+                break
+            level, owner, _ = s.split('+')
+            result.append({
+                'level': level,
+                'owner': owner,
+            })
+        while len(result) < 8:
+            result.append({'team': 'empty'})
+        return result
 
     def get_lat(self):
         return '{:.6f}'.format(self.latE6 / 1000000)
@@ -47,6 +73,32 @@ class Portal(models.Model):
         if not self.rlng:
             return ''
         return '{:.6f}'.format(float(self.rlng))
+
+    def updated_str(self):
+        if not self.updated:
+            return "NEVER"
+
+        span =  now() - self.updated
+        days = span.days
+        seconds = span.seconds
+        if days >= 6:
+            return self.updated.strftime('%Y-%m-%d')
+        elif days > 1:
+            return '{} days ago'.format(days)
+        elif days == 1:
+            return '1 day ago'
+        elif seconds >= 3600 * 2:
+            return '{} hours ago'.format(seconds // 3600)
+        elif seconds >= 3600:
+            return '1 hour ago'
+        elif seconds >= 60 * 2:
+            return '{} mins ago'.format(seconds // 60)
+        elif seconds >= 60:
+            return '1 min ago'
+        elif seconds > 1:
+            return '{} secs ago'.format(seconds)
+        else:
+            return '1 sec ago'
 
 
 class Player(models.Model):

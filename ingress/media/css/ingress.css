@@ -5,8 +5,20 @@ a:active {text-decoration: underline;}
 
 h1 {font-size:1.4em;}
 
+.bg-E {background-color: green !important;}
+.bg-R {background-color: blue !important;}
+.bg-N {background-color: #bbb !important;}
 .c-E {color: green !important;}
 .c-R {color: blue !important;}
+
+.c-L8 {color:#9627f4 !important;}
+.c-L7 {color:#c124e0 !important;}
+.c-L6 {color:#eb26cd !important;}
+.c-L5 {color:#fd2992 !important;}
+.c-L4 {color:#e40000 !important;}
+.c-L3 {color:#ff7315 !important;}
+.c-L2 {color:#ffa630 !important;}
+.c-L1 {color:#fece5a !important;}
 
 .card {
     background:#CCC;
@@ -32,9 +44,14 @@ h1 {font-size:1.4em;}
     color: green;
 }
 
+.pl-5 {padding-left:5px;}
 .pl-20 {padding-left:20px;}
 .mt-20 {margin-top:20px;}
 .mt-40 {margin-top:40px;}
+.mb-20 {margin-bottom:20px;}
+.mb-30 {margin-bottom:30px;}
+.mb-40 {margin-bottom:40px;}
+
 .gray {color:gray;}
 
 .footer {
@@ -43,4 +60,53 @@ h1 {font-size:1.4em;}
     margin-top: 40px;
     padding-top: 15px;
     border-top: 1px solid #EEE;
+}
+
+.reso-header {
+    height: 72px;
+    line-height: 72px;
+}
+
+.cell-reso {
+    margin: 4px;
+    height: 30px;
+    width: 65px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 0em;
+    float: left;
+}
+
+.cell-mod {
+    margin: 4px;
+    width: 65px;
+    height: 52px;;
+    line-height: 25px;
+    text-align: center;
+    letter-spacing: 0em;
+    font-size: 15px;
+    float: left;
+}
+
+.cell-img {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.sec-mod {
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.bg-mod-common {
+    background-color: #8cffbf;
+}
+.bg-mod-rare {
+    background-color: #73a8ff;
+}
+.bg-mod-rare {
+    background-color: #b08cff;
+}
+.bg-mod-empty {
+    background-color: #bbb;
 }

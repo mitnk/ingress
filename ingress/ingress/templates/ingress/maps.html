@@ -7,28 +7,105 @@
 
 {% block content %}
 <div style="padding-left: 20px;">
-<h1>{{ portal.name }} on Map</h1>
-<img src="/media/img/map/{{ portal.guid }}_out.png">
-<br>
-远景图
-<br>
-<br>
-<br>
+    <h1>{{ portal.name }} on Map</h1>
 
 
-<img src="/media/img/map/{{ portal.guid }}_in.png">
-<br>
-近景图
-<br>
-<br>
-<br>
+    {% if portal.updated %}
+
+    <div class="pure-g">
+        <div class="pure-u-23-24 mb-30">
+            <span class="gray">Portal info last updated at {{ portal.updated_str }}.</span>
+        </div>
+    </div>
+
+    <div class="pure-g mb-30">
+        <div class="pure-u-1-8">
+            <div>Owner</div>
+        </div>
+        <div class="pure-u-20-24 pl-5">
+            <span class="c-{{ portal.team }}">{{ portal.owner }}</span>
+        </div>
+    </div>
+
+    <div class="pure-g">
+        <div class="pure-u-1-8">
+            <div class="reso-header">Res.</div>
+        </div>
+        <div class="pure-u-20-24">
+            {% if portal.res_count > 0 %}
+                {% for x in portal.resolator_list %}
+                    {% if forloop.first %}
+                    <div class="pure-u-23-24">
+                    {% endif %}
+
+                    {% if forloop.counter == 5 %}
+                    <div class="pure-u-23-24">
+                    {% endif %}
+
+                    <div class="bg-{% if x.owner %}{{portal.team}}{% else %}N{% endif %} cell-reso c-L{{ x.level }}">
+                        {% if x.owner %}
+                        <span title="{{ x.owner }}">L{{ x.level }}</span>
+                        {% endif %}
+                    </div>
+
+                    {% if forloop.counter == 4 %}
+                    </div>
+                    {% endif %}
+
+                    {% if forloop.last %}
+                    </div>
+                    {% endif %}
+
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
 
 
-<img src="/media/img/map/{{ portal.guid }}_in_sat.png">
-<br>
-卫星图
-<br>
-<br>
-<br>
+    <div class="pure-g">
+        <div class="pure-u-1-8">
+            <div class="reso-header">Mods</div>
+        </div>
+        <div class="pure-u-20-24 sec-mod">
+            {% for x in portal.mod_list %}
+                <div class="bg-mod-{{ x.rarity|lower }} cell-mod">
+                    <span title="{{ x.owner }}">{{ x.name }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% endif %}
+
+
+    <div class="pure-g">
+        <div class="pure-u-1-8">
+            <div class="reso-header">远景图</div>
+        </div>
+        <div class="pure-u-20-24 cell-img">
+            <img src="/media/img/map/{{ portal.guid }}_out.png">
+        </div>
+    </div>
+
+
+    <div class="pure-g">
+        <div class="pure-u-1-8">
+            <div class="reso-header">近景图</div>
+        </div>
+        <div class="pure-u-20-24 cell-img">
+            <img src="/media/img/map/{{ portal.guid }}_in.png">
+        </div>
+    </div>
+
+
+    <div class="pure-g">
+        <div class="pure-u-1-8">
+            <div class="reso-header">近景图</div>
+        </div>
+        <div class="pure-u-20-24 cell-img">
+            <img src="/media/img/map/{{ portal.guid }}_in_sat.png">
+        </div>
+    </div>
+
 </div>
 {% endblock %}
