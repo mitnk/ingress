@@ -58,7 +58,7 @@
                     <div class="pure-u-23-24">
                     {% endif %}
 
-                    <div data-tooltip="{{ x.owner }}" class="bg-{% if x.owner %}{{portal.team}}{% else %}N{% endif %} cell-reso c-L{{ x.level }} {% if forloop.counter > 4 %} tooltip-bottom{% endif %}">
+                    <div {% if x.owner %}data-tooltip="{{ x.owner }}"{% endif %} class="bg-{% if x.owner %}{{portal.team}}{% else %}N{% endif %} cell-reso c-L{{ x.level }} {% if forloop.counter > 4 %} tooltip-bottom{% endif %}">
                         {% if x.owner %}
                         <span>L{{ x.level }}</span>
                         {% endif %}
