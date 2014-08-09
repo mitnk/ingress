@@ -50,7 +50,7 @@ class Command(BaseCommand):
         old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 6)
         portals = Portal.objects.filter(
             Q(updated__lt=old_datetime) | Q(updated=None)
-        )[:20]
+        ).order_by('updated')[:20]
         total = portals.count()
         i = 1
         for po in portals:
