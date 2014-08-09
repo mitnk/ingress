@@ -1,0 +1,50 @@
+{% extends "ingress/base.html" %}
+{% block title %}Search{% endblock %}
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block content %}
+
+{% if result %}
+<div class="pl-20">
+    <table class="pure-table pure-table-bordered">
+        <thead>
+        <tr>
+            <th>Player</th>
+            <th>Portal</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pl, po in result %}
+        <tr>
+            <td>
+                {% if pl %}
+                <a href="/actions/player/{{ pl.id }}/">
+                    <span class="c-{{ pl.team }}">{{ pl.id }}</span>
+                </a>
+                {% endif %}
+            </td>
+            <td>
+                {% if po %}
+                <a href="/actions/portal/{{ po.guid }}/">
+                    <span class="c-{{ po.team }}">{{ po.name }}</span>
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+    <div style="padding:30px;">
+        <form class="pure-form" method="post" action=".">
+            <input name="name_to_search" placeholder="player name or portal name" type="text" class="pure-input-rounded" autofocus="autofocus">
+            <button type="submit" class="pure-button">Search</button>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endif %}
+{% endblock %}

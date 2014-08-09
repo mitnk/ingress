@@ -1,0 +1,43 @@
+{% extends "ingress/base.html" %}
+{% block title %}Players Over Lv8{% endblock %}
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="pl-20 mt-20">
+    <h1>Players over Lv8</h1>
+    <table class="pure-table pure-table-bordered">
+        <thead>
+        <tr>
+            <th>Enlightened</th>
+            <th>Resistance</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pe, pr in result %}
+        <tr>
+            <td>
+                {% if pe %}
+                    <span class="c-{{ pe.team }}">{{ pe.id }}</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if pr %}
+                    <span class="c-{{ pr.team }}">{{ pr.id }}</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="pure-g">
+    <div class="pure-u-1-1 pl-20 gray mt-40">
+        <strong>Note</strong>: You are over Lv8 and not shows here? Deploy a L8 Resonator and refresh this page.
+    </div>
+</div>
+{% endblock %}

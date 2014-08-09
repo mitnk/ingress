@@ -1,0 +1,56 @@
+{% extends "ingress/base.html" %}
+{% block title %}Actions{% endblock %}
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block content %}
+<div style="padding-left: 1em;">
+
+<h1>Latest 100 Actions{% if portal %} on {{ portal.name }}{% endif %}</h1>
+
+{% if portal.has_maps %}
+<a href="/maps/{{ portal.guid }}/" target="_blank">View {{ portal.name }} on Map</a>
+<br>
+<br>
+{% endif %}
+<table class="pure-table pure-table-bordered">
+    <thead>
+    <tr>
+        <th>Time</th>
+        <th>Player</th>
+        <th>Action</th>
+        <th>Portal</th>
+        <th>Res.</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in actions %}
+    <tr class="c-{{ item.player.team }}">
+        <td>{{ item.hour_minute }}</td>
+        <td>
+            <a href="/actions/player/{{ item.player.id }}/">
+                <span class="c-{{ item.player.team }}">{{ item.player.id }}</span>
+            </a>
+        </td>
+        <td>{{ item.name }}</td>
+        <td>
+            <a href="/actions/portal/{{ item.portal.guid }}/">
+                <span class="c-{{ item.player.team }}">{{ item.portal.name }}</span>
+            </a>
+            {% if item.portal_to %}
+                To<br>
+                <a href="/actions/portal/{{ item.portal_to.guid }}/">
+                    <span class="c-{{ item.player.team }}">{{ item.portal_to.name }}</span>
+                </a>
+            {% endif %}
+        </td>
+        <td>{% if item.resonator %}L{{ item.resonator }}{% endif %}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</div>
+{% endblock %}

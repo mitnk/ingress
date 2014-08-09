@@ -1,0 +1,88 @@
+{% extends "ingress/base.html" %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block meta %}
+{% if is_mus %}
+<style>
+.card p {
+    font-size: 28px;
+</style>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="pure-g">
+    <div class="pure-u-1-4">
+        <div class="card">
+            <h1>ENLIGHTENED</h1>
+            <p class="c-E">
+            {% if is_mus %}
+                {{ count_E_with_comma }}
+            {% else %}
+                {{ count_E }}
+            {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <div class="pure-u-1-4">
+        <div class="card">
+            <h1>RESISTANCE</h1>
+            <p class="c-R">
+            {% if is_mus %}
+                {{ count_R_with_comma }}
+            {% else %}
+                {{ count_R }}
+            {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <div class="pure-u-1-4">
+        <div class="card">
+            {% if is_mus %}
+                <canvas id="can" width="126" height="126" />
+            {% else %}
+                <canvas id="can" width="142" height="142" />
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="pure-g">
+    <div class="pure-u-1-1 pl-20 gray">
+        {% if mus_now %}
+            <strong>Note</strong>: Data for {{ mus_now.year }}-{{ mus_now.month }}.
+        {% endif %}
+        {% if title == "Players" %}
+            <a href="/players/over_lv8/">View Players Over Lv8</a>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    var canvas = document.getElementById("can");
+    var ctx = canvas.getContext("2d");
+    var lastend = 0;
+    var data = [{{ count_E }}, {{ count_R }}]; // If you add more data values make sure you add more colors
+    var myTotal = 0; // Automatically calculated so don't touch
+    var myColor = ['green', 'blue'];  // Colors of each slice
+
+    for(var e = 0; e < data.length; e++) {
+        myTotal += data[e];
+    }
+
+    for (var i = 0; i < data.length; i++) {
+        ctx.fillStyle = myColor[i];
+        ctx.beginPath();
+        ctx.moveTo(canvas.width/2,canvas.height/2);
+        // Arc Parameters: x, y, radius, startingAngle (radians), endingAngle (radians), antiClockwise (boolean)
+        ctx.arc(canvas.width/2,canvas.height/2,canvas.height/2,lastend,lastend+(Math.PI*2*(data[i]/myTotal)),false);
+        ctx.lineTo(canvas.width/2,canvas.height/2);
+        ctx.fill();
+        lastend += Math.PI*2*(data[i]/myTotal);
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "ingress/base.html" %}
+{% block title %}{{ portal.name }} on Map{% endblock %}
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block content %}
+<div style="padding-left: 20px;">
+<h1>{{ portal.name }} on Map</h1>
+<img src="/media/img/map/{{ portal.guid }}_out.png">
+<br>
+远景图
+<br>
+<br>
+<br>
+
+
+<img src="/media/img/map/{{ portal.guid }}_in.png">
+<br>
+近景图
+<br>
+<br>
+<br>
+
+
+<img src="/media/img/map/{{ portal.guid }}_in_sat.png">
+<br>
+卫星图
+<br>
+<br>
+<br>
+</div>
+{% endblock %}
