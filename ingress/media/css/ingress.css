@@ -93,6 +93,12 @@ h1 {font-size:1.4em;}
     padding-bottom: 20px;
 }
 
+.cell-portal-owner {
+    padding-left: 5px;
+    font-size: 20;
+    font-weight: bold;
+}
+
 .sec-mod {
     padding-top: 20px;
     padding-bottom: 30px;
