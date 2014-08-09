@@ -93,9 +93,21 @@
 {% endif %} {# endif of portal.updated #}
 
 
+    {% if portal.image_fetched %}
     <div class="pure-g">
         <div class="pure-u-1-8">
-            <div class="reso-header">远景图</div>
+            <div class="reso-header">肖像</div>
+        </div>
+        <div class="pure-u-20-24 cell-img">
+            <img src="/media/img/map/{{ portal.guid }}_image.jpg">
+        </div>
+    </div>
+    {% endif %}
+
+
+    <div class="pure-g">
+        <div class="pure-u-1-8">
+            <div class="reso-header">远景</div>
         </div>
         <div class="pure-u-20-24 cell-img">
             <img src="/media/img/map/{{ portal.guid }}_out.png">
@@ -105,7 +117,7 @@
 
     <div class="pure-g">
         <div class="pure-u-1-8">
-            <div class="reso-header">近景图</div>
+            <div class="reso-header">近景</div>
         </div>
         <div class="pure-u-20-24 cell-img">
             <img src="/media/img/map/{{ portal.guid }}_in.png">
@@ -115,7 +127,7 @@
 
     <div class="pure-g">
         <div class="pure-u-1-8">
-            <div class="reso-header">近景图</div>
+            <div class="reso-header">卫星</div>
         </div>
         <div class="pure-u-20-24 cell-img">
             <img src="/media/img/map/{{ portal.guid }}_in_sat.png">

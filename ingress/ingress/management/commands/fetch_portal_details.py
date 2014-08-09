@@ -43,9 +43,6 @@ class Command(BaseCommand):
         except:
             logging.exception('')
 
-    def save_image(self, url, path):
-        urlretrieve(url, path)
-
     def handle(self, *args, **options):
         old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 6)
         portals = Portal.objects.filter(updated=None)[:20]
