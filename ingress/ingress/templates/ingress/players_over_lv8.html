@@ -12,6 +12,7 @@
     <table class="pure-table pure-table-bordered">
         <thead>
         <tr>
+            <th>Index</th>
             <th>Enlightened</th>
             <th>Resistance</th>
         </tr>
@@ -19,6 +20,9 @@
         <tbody>
         {% for pe, pr in result %}
         <tr>
+            <td>
+                {{ forloop.counter }}
+            </td>
             <td>
                 {% if pe %}
                     <span class="c-{{ pe.team }}">{{ pe.id }}</span>
