@@ -108,3 +108,7 @@ def portal_detail(request, guid):
     except Portal.DoesNotExist:
         raise Http404()
     return render(request, "ingress/portal_detail.html", context)
+
+
+def about(request):
+    return render(request, "ingress/about.html")
