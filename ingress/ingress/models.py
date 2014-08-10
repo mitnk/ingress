@@ -6,7 +6,7 @@ from django.utils.timezone import now
 class Portal(models.Model):
     guid = models.CharField(max_length=40, primary_key=True)
     name = models.CharField(max_length=256)
-    team = models.CharField(max_length=1)
+    team = models.CharField(max_length=1, db_index=True)
     owner = models.CharField(max_length=40, blank=True)
     latE6 = models.IntegerField()
     lngE6 = models.IntegerField()
@@ -103,7 +103,7 @@ class Portal(models.Model):
 
 class Player(models.Model):
     id = models.CharField(max_length=40, primary_key=True)
-    team = models.CharField(max_length=1)
+    team = models.CharField(max_length=1, db_index=True)
     portal_count = models.IntegerField(default=0)
     over_lv8 = models.BooleanField(default=False)
     added = models.DateTimeField(auto_now_add=True)
@@ -120,7 +120,7 @@ class Action(models.Model):
     portal = models.ForeignKey('Portal', null=True, blank=True, related_name='portal')
     portal_to = models.ForeignKey('Portal', null=True, blank=True, related_name='portal_to')
     timestamp = models.BigIntegerField()
-    added = models.DateTimeField(auto_now_add=True)
+    added = models.DateTimeField(auto_now_add=True, db_index=True)
 
     def hour_minute(self):
         d = datetime.datetime.utcfromtimestamp(self.timestamp // 1000)
@@ -152,7 +152,7 @@ class MU(models.Model):
     player = models.ForeignKey('Player')
     points = models.BigIntegerField()
     timestamp = models.BigIntegerField()
-    team = models.CharField(max_length=1)
+    team = models.CharField(max_length=1, db_index=True)
     added = models.DateTimeField(auto_now_add=True)
 
 
