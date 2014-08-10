@@ -121,7 +121,11 @@ class Command(BaseCommand):
                     plain = x[1]['plain']
 
                     if 'destroyed an' in plain:
-                        action['name'] = 'destroyed'
+                        action['name'] = 'destroyed'  # a resonator
+                    elif 'destroyed a Control Field' in plain:
+                        action['name'] = 'unfield'
+                    elif 'destroyed the Link' in plain:
+                        action['name'] = 'unlinked'
                     elif 'deployed an' in plain:
                         action['name'] = 'deployed'
                     elif 'captured' in plain:
