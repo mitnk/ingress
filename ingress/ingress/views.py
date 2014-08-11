@@ -72,9 +72,21 @@ def players_over_lv8(request):
     return render(request, "ingress/players_over_lv8.html", context)
 
 
+def players_top(request):
+    d = now()
+    dt = datetime.datetime(d.year, d.month, 1, 0, 0, 0)
+    info_E = MU.objects.filter(team='E', added__gt=dt).values('player')
+    info_E = info_E.annotate(tpoints=Sum('points')).order_by('-tpoints')[:50]
+    info_R = MU.objects.filter(team='R', added__gt=dt).values('player')
+    info_R = info_R.annotate(tpoints=Sum('points')).order_by('-tpoints')[:50]
+    result = zip_longest(info_E, info_R)
+    context = {'result': result, 'd': d}
+    return render(request, "ingress/players_top.html", context)
+
+
 def mus(request):
-    n = now()
-    dt = datetime.datetime(n.year, n.month, 1, 0, 0, 0)
+    d = now()
+    dt = datetime.datetime(d.year, d.month, 1, 0, 0, 0)
     count_E = MU.objects.filter(team='E', added__gt=dt).aggregate(points=Sum('points'))['points']
     count_R = MU.objects.filter(team='R', added__gt=dt).aggregate(points=Sum('points'))['points']
     context = {
@@ -83,7 +95,7 @@ def mus(request):
         'count_R': count_R,
         'count_R_with_comma': '{:,d}'.format(count_R),
         'title': 'MUs',
-        'mus_now': n,
+        'mus_now': d,
         'is_mus': True,
     }
     return render(request, "ingress/vs.html", context)

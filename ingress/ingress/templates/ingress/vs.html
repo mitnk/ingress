@@ -53,9 +53,11 @@
 <div class="pure-g">
     <div class="pure-u-1-1 pl-20 gray">
         {% if mus_now %}
-            <strong>Note</strong>: Data for {{ mus_now.year }}-{{ mus_now.month }}.
+            <strong>Note</strong>: Data for {{ mus_now|date:"Y" }}-{{ mus_now|date:"m" }}.
         {% endif %}
         {% if title == "Players" %}
+            <a href="/players/top/">View Top Players</a>
+            <br>
             <a href="/players/over_lv8/">View Players Over Lv8</a>
         {% endif %}
     </div>

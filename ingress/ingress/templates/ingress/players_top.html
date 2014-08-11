@@ -1,0 +1,42 @@
+{% extends "ingress/base.html" %}
+{% block title %}Top Players{% endblock %}
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="pl-20 mt-20">
+    <h1>Top Players of {{ d|date:"Y" }}-{{ d|date:"m" }}</h1>
+    <table class="pure-table pure-table-bordered">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Enlightened</th>
+            <th>Resistance</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pe, pr in result %}
+        <tr>
+            <td>
+                {{ forloop.counter }}
+            </td>
+            <td>
+                {% if pe %}
+                    <span class="c-E">{{ pe.player }}</span>
+                {% endif %}
+            </td>
+            <td>
+                {% if pr %}
+                    <span class="c-R">{{ pr.player }}</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
