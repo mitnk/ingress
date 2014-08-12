@@ -35,6 +35,11 @@ class Portal(models.Model):
     def get_absolute_url(self):
         return '/portals/{}/'.format(self.guid)
 
+    def get_hold_days(self):
+        if self.last_captured:
+            return 0
+        return (self.last_captured - now()).days
+
     def mod_list(self):
         result = []
         for s in self.mod_status.split('|'):

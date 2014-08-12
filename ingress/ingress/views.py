@@ -128,5 +128,11 @@ def portals_popular(request):
     return render(request, "ingress/portals_popular.html", context)
 
 
+def portals_long_time_hold_enlightened(request):
+    context = {}
+    context['result'] = Portal.objects.filter(team='E').exclude(last_captured=None).order_by('last_captured')[:50]
+    return render(request, "ingress/portals_long_time_hold_enlightened.html", context)
+
+
 def about(request):
     return render(request, "ingress/about.html")
