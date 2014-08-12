@@ -56,9 +56,13 @@
             <strong>Note</strong>: Data for {{ mus_now|date:"Y" }}-{{ mus_now|date:"m" }}.
         {% endif %}
         {% if title == "Players" %}
+            <br>
             <a href="/players/top/">View Top Players</a>
             <br>
             <a href="/players/over_lv8/">View Players Over Lv8</a>
+        {% elif title == "Portals" %}
+            <br>
+            <a href="/portals/popular/">View Popular Portals</a>
         {% endif %}
     </div>
 </div>

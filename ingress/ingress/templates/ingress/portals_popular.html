@@ -1,0 +1,40 @@
+{% extends "ingress/base.html" %}
+{% block title %}Popular Portals{% endblock %}
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="pl-20">
+    <h1>Popular Portals</h1>
+
+    <table class="pure-table pure-table-bordered">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Portal</th>
+            <th>Battles</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for po in result %}
+        <tr>
+            <td>
+                {{ forloop.counter }}
+            </td>
+            <td>
+                <a href="/actions/portal/{{ po.guid }}/">
+                    <span class="c-{{ po.team }}">{{ po.name }}</span>
+                </a>
+            </td>
+            <td>
+                {{ po.capture_count }}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

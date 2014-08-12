@@ -122,5 +122,11 @@ def portal_detail(request, guid):
     return render(request, "ingress/portal_detail.html", context)
 
 
+def portals_popular(request):
+    context = {}
+    context['result'] = Portal.objects.order_by('-capture_count')[:50]
+    return render(request, "ingress/portals_popular.html", context)
+
+
 def about(request):
     return render(request, "ingress/about.html")
