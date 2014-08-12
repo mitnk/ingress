@@ -32,6 +32,9 @@ class Portal(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return '/portals/{}/'.format(self.guid)
+
     def mod_list(self):
         result = []
         for s in self.mod_status.split('|'):
