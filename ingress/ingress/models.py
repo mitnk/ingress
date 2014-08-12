@@ -24,6 +24,9 @@ class Portal(models.Model):
     health = models.IntegerField(default=0)
     updated = models.DateTimeField(null=True)
 
+    last_captured = models.DateTimeField(null=True)
+    capture_count = models.IntegerField(default=0)
+
     added = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
