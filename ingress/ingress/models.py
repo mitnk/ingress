@@ -36,7 +36,7 @@ class Portal(models.Model):
         return '/portals/{}/'.format(self.guid)
 
     def get_hold_days(self):
-        if self.last_captured:
+        if not self.last_captured:
             return 0
         return (self.last_captured - now()).days
 
