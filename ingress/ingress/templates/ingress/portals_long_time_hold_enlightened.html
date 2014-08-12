@@ -36,5 +36,33 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <h1>Other Secret Portals</h1>
+    <table class="pure-table pure-table-bordered">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Portal</th>
+            <th>Days (over 20 days)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for po in others %}
+        <tr>
+            <td>
+                {{ forloop.counter }}
+            </td>
+            <td>
+                <a href="{{ po.get_absolute_url }}">
+                    <span class="c-{{ po.team }}">{{ po.name }}</span>
+                </a>
+            </td>
+            <td>
+                {{ po.get_hold_days }}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}
