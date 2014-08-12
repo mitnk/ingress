@@ -1,6 +1,7 @@
 import logging
 import time
 from django.core.management.base import BaseCommand
+from django.utils.timezone import now
 from ingress.ingress.models import Portal, Action, Player, MU, Message
 from ingress.ingress.utils import within_range
 from . import utils
@@ -170,6 +171,8 @@ class Command(BaseCommand):
 
             if action['name'] == 'captured':
                 obj_portal.owner = player['id']
+                obj_portal.capture_count += 1
+                obj_portal.last_captured = now()
                 obj_portal.save()
 
             if portal_to:
