@@ -130,7 +130,7 @@ def portals_popular(request):
 
 def portals_long_time_hold_enlightened(request):
     context = {}
-    context['result'] = Portal.objects.filter(team='E').exclude(last_captured=None).order_by('last_captured')[:50]
+    context['result'] = Portal.objects.filter(team='E').exclude(last_captured=None).order_by('last_captured')[:100]
     return render(request, "ingress/portals_long_time_hold_enlightened.html", context)
 
 
