@@ -38,7 +38,7 @@ class Portal(models.Model):
     def get_hold_days(self):
         if not self.last_captured:
             return 0
-        return (self.last_captured - now()).days
+        return (now() - self.last_captured).days
 
     def mod_list(self):
         result = []
