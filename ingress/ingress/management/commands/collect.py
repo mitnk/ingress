@@ -18,7 +18,7 @@ def get_n_seconds_ago(n):
 
 
 def get_timems_last_minute():
-    one_hour_ago = get_n_seconds_ago(60 * 60)
+    one_hour_ago = get_n_seconds_ago(60 * 60 * 24)
     try:
         # we must +1 for this, since sometimes a lot of items with same timestamp
         # so that we got endless loop then.
