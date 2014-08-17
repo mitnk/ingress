@@ -60,6 +60,10 @@ class Command(BaseCommand):
     help = 'Collect Ingress Info'
 
     def handle(self, *args, **options):
+        if utils.cookie_need_update():
+            logging.error('need to update cookie and others')
+            return
+
         _D['_'] += 1
         if _D['_'] > 4:
             return

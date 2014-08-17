@@ -78,7 +78,16 @@ def _touch_need_update():
     open(file_need_update, 'w').close()
 
 
+def cookie_need_update():
+    file_need_update = os.path.join(settings.DIR_INGRESS_CONF, 'need_update.txt')
+    return os.path.exists(file_need_update)
+
+
 def get_plexts(timems):
+    if cookie_need_update():
+        logging.error('need to update cookie and others')
+        return
+
     payload.update({'minTimestampMs': timems})
     r = requests.post("https://www.ingress.com/r/getPlexts", data=json.dumps(payload), headers=HEADERS)
     if r.status_code != 200:

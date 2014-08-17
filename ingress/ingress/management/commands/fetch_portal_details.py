@@ -11,7 +11,7 @@ from django.db.models import Q
 from django.utils.timezone import now
 from ingress.ingress.models import Portal
 
-from .utils import HEADERS
+from .utils import HEADERS, cookie_need_update
 
 
 class Command(BaseCommand):
@@ -27,6 +27,10 @@ class Command(BaseCommand):
         }
 
     def get_portal_details(self, po):
+        if cookie_need_update():
+            logging.error('need to update cookie and others')
+            return
+
         payload = self.get_payload(po.guid)
         try:
             r = requests.post(
