@@ -134,7 +134,18 @@ def portals_long_time_hold_enlightened(request):
     others = Portal.objects.filter(team='E', last_captured=None)
     context['result'] = result
     context['others'] = others
-    return render(request, "ingress/portals_long_time_hold_enlightened.html", context)
+    context['team'] = 'E'
+    return render(request, "ingress/portals_long_time_hold.html", context)
+
+
+def portals_long_time_hold_r(request):
+    context = {}
+    result = Portal.objects.filter(team='R').exclude(last_captured=None).order_by('last_captured')[:100]
+    others = Portal.objects.filter(team='R', last_captured=None)
+    context['result'] = result
+    context['others'] = others
+    context['team'] = 'R'
+    return render(request, "ingress/portals_long_time_hold.html", context)
 
 
 def about(request):

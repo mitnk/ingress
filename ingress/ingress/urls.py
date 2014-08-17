@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^portals/$', views.portals, name='ingress_portals'),
     url(r'^portals/popular/$', views.portals_popular, name='ingress_portals_popular'),
     url(r'^portals/beijing_does_not_have_long_time_portals/enlightened/$', views.portals_long_time_hold_enlightened, name='ingress_portals_long_time_hold_enlightened'),
+    url(r'^portals/beijing_has_long_time_portals/r/$', views.portals_long_time_hold_r, name='ingress_portals_long_time_hold_r'),
     url(r'^portals/([\.\w]+)/$', views.portal_detail, name='ingress_portal_detail'),
 
     url(r'^players/$', views.players, name='ingress_players'),
