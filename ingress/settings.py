@@ -96,6 +96,9 @@ BAIDU_APP_SECRET_KEY = 'xxx'
 
 DIR_PORTAL_MAPS = os.path.join(BASE_DIR, 'ingress/media/img/map/')
 
+DIR_HOME = os.path.expanduser("~")
+DIR_INGRESS_CONF = os.path.join(DIR_HOME, '.ingress')
+
 # Change the following to real values in settings_local.py
 MIN_LAT = 40011769
 MAX_LAT = 40011769
