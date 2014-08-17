@@ -35,6 +35,10 @@ class Portal(models.Model):
     def get_absolute_url(self):
         return '/portals/{}/'.format(self.guid)
 
+    def get_ingress_url(self):
+        url = 'http://www.ingress.com/intel?latE6={}&lngE6={}&z=17'
+        return url.format(self.latE6, self.lngE6)
+
     def get_hold_days(self):
         if not self.last_captured:
             return 'Unknown'
