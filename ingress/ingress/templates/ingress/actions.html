@@ -1,5 +1,5 @@
 {% extends "ingress/base.html" %}
-{% block title %}Actions{% endblock %}
+{% block title %}Actions{% if portal %} on {{ portal.name }}{% else %}{% if player %} of {{ player.id }}{% endif %}{% endif %}{% endblock %}
 {% block meta %}
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {% endblock %}

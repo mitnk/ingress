@@ -27,6 +27,10 @@ def actions(request):
 
 def actions_player(request, pid):
     context = {}
+    try:
+        context['player'] = Player.objects.get(id=pid)
+    except Player.DoesNotExist:
+        raise Http404()
     context['actions'] = Action.objects.filter(player__id=pid).order_by('-added')[:100]
     return render(request, "ingress/actions.html", context)
 
