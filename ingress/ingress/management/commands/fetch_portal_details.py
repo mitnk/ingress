@@ -89,6 +89,9 @@ class Command(BaseCommand):
                 for x in details['resonators'] if x
             ])
 
+            name = details['title']
+            latE6 = details['latE6']
+            lngE6 = details['lngE6']
             res_count = details['resCount']
             image = details['image']
             health = details['health']
@@ -96,6 +99,9 @@ class Command(BaseCommand):
             owner = '' if 'owner' not in details else details['owner']
             team = details['team'][0]
 
+            po.name = name
+            po.latE6 = latE6
+            po.lngE6 = lngE6
             po.mod_status = mod_status
             po.res_count = res_count
             po.res_status = res_status
