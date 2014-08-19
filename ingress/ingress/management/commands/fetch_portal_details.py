@@ -48,9 +48,12 @@ class Command(BaseCommand):
             logging.exception('')
 
     def handle(self, *args, **options):
-        old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 6)
-        portals = Portal.objects.filter(updated=None)[:20]
+        old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 1)
+        portals = Portal.objects.filter(level=8, updated__lt=old_datetime)
         if not portals:
+            portals = Portal.objects.filter(updated=None)[:20]
+        if not portals:
+            old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 6)
             portals = Portal.objects.filter(updated__lt=old_datetime).order_by('updated')[:20]
         total = portals.count()
         i = 1
