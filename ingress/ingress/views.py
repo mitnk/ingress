@@ -116,7 +116,8 @@ def search(request):
     if request.method == "POST":
         text = request.POST.get('name_to_search', '')[:40]
         players = Player.objects.filter(id__icontains=text)[:40] or ['']
-        portals = Portal.objects.filter(name__icontains=text)[:40] or ['']
+        portals = Portal.objects.filter(name__icontains=text) \
+            .exclude(has_problem=True)[:40] or ['']
         result = zip_longest(players, portals)
         context['result'] = result
     return render(request, "ingress/search.html", context)
