@@ -45,7 +45,7 @@ class Command(BaseCommand):
             logging.exception('Error in get_portal_details():')
             return
 
-        if is_a_bad_portal(r):
+        if self.is_a_bad_portal(r):
             po.has_problem = True
             po.save()
             return
