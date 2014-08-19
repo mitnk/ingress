@@ -177,7 +177,14 @@ class Command(BaseCommand):
                 obj_portal.owner = player['id']
                 obj_portal.capture_count += 1
                 obj_portal.last_captured = now()
+                # update for two cases: 1. From L0 to L1 2. From L8 to L1,
+                # the portal real level will fetch inside another command.
+                obj_portal.level = 1
                 obj_portal.save()
+            elif action['name'] == 'destroyed':
+                if obj_portal.level == 8:
+                    obj_portal.level -= 1
+                    obj_portal.save()
 
             if portal_to:
                 obj_portal_to = get_or_create_portal(portal_to)
