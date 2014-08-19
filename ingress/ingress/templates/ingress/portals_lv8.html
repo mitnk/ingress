@@ -1,0 +1,46 @@
+{% extends "ingress/base.html" %}
+{% block title %}L8 Portals{% endblock %}
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="pl-20">
+    <h1>L8 Portals</h1>
+
+    <table class="pure-table pure-table-bordered">
+        <thead>
+        <tr>
+            <th>Index</th>
+            <th>Portal</th>
+            <th>Owner</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for po in portals %}
+        <tr>
+            <td>
+                {{ forloop.counter }}
+            </td>
+            <td>
+                <a href="{{ po.get_absolute_url }}">
+                    <span class="c-{{ po.team }}">{{ po.name }}</span>
+                </a>
+            </td>
+            <td>
+                <span class="c-{{ po.team }}">{{ po.owner }}</span>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="pure-g mt-40">
+    <div class="pure-u-1-1 pl-20 gray">
+        <strong>Note</strong>: Info are not in real time. Some of the above portals may not be L8 any more.
+    </div>
+</div>
+{% endblock %}

@@ -6,18 +6,16 @@
 
 
 {% block content %}
-
 {% if result %}
-<div class="pl-20">
+    <div class="pl-20">
     <table class="pure-table pure-table-bordered">
         <thead>
         <tr>
-            <th>Player</th>
-            <th>Portal</th>
+            <th>Player Matched</th>
         </tr>
         </thead>
         <tbody>
-        {% for pl, po in result %}
+        {% for pl in players %}
         <tr>
             <td>
                 {% if pl %}
@@ -26,6 +24,22 @@
                 </a>
                 {% endif %}
             </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <div class="pl-20">
+    <table class="pure-table pure-table-bordered">
+        <thead>
+        <tr>
+            <th>Portal Matched</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for po in portals %}
+        <tr>
             <td>
                 {% if po %}
                 <a href="/actions/portal/{{ po.guid }}/">
@@ -37,7 +51,8 @@
         {% endfor %}
         </tbody>
     </table>
-</div>
+
+    </div>
 {% else %}
     <div class="pl-30">
         <form class="pure-form" method="post" action=".">

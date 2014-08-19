@@ -56,6 +56,12 @@ def portals(request):
     return render(request, "ingress/vs.html", context)
 
 
+def portals_lv8(request):
+    portals = Portal.objects.filter(level=8)
+    context = {'portals': portals}
+    return render(request, "ingress/portals_lv8.html", context)
+
+
 def players(request):
     count_E = Player.objects.filter(team='E').count()
     count_R = Player.objects.filter(team='R').count()
@@ -111,9 +117,9 @@ def search(request):
         text = request.POST.get('name_to_search', '')[:40]
         players = Player.objects.filter(id__icontains=text)[:40] or ['']
         portals = Portal.objects.filter(name__icontains=text)[:40] or ['']
-        #result = zip(players, cycle(portals)) if len(players) > len(portals) else zip(cycle(players), portals)
-        result = zip_longest(players, portals)
-        context['result'] = result
+        context['players'] = players
+        context['portals'] = portals
+        context['result'] = True
     return render(request, "ingress/search.html", context)
 
 
