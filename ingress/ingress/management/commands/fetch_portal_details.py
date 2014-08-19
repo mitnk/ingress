@@ -26,6 +26,9 @@ class Command(BaseCommand):
             'v': settings.INGRESS_INTEL_PAYLOAD_V,
         }
 
+    def is_a_bad_portal(self, r):
+        return r.status_code != 200
+
     def get_portal_details(self, po):
         if cookie_need_update():
             logging.error('need to update cookie and others')
@@ -42,19 +45,28 @@ class Command(BaseCommand):
             logging.exception('Error in get_portal_details():')
             return
 
+        if is_a_bad_portal(r):
+            po.has_problem = True
+            po.save()
+            return
+
         try:
             return json.loads(r.text)
         except:
             logging.exception('')
+            logging.info(r.text)
 
     def handle(self, *args, **options):
         old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 1)
-        portals = Portal.objects.filter(level=8, updated__lt=old_datetime)
+        portals = Portal.objects.filter(level=8, updated__lt=old_datetime) \
+            .exclude(has_problem=True)
         if not portals:
-            portals = Portal.objects.filter(updated=None)[:20]
+            portals = Portal.objects.filter(updated=None) \
+                .exclude(has_problem=True)[:20]
         if not portals:
             old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 6)
-            portals = Portal.objects.filter(updated__lt=old_datetime).order_by('updated')[:20]
+            portals = Portal.objects.filter(updated__lt=old_datetime) \
+                .exclude(has_problem=True).order_by('updated')[:20]
         total = portals.count()
         i = 1
         for po in portals:

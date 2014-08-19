@@ -26,6 +26,7 @@ class Portal(models.Model):
 
     last_captured = models.DateTimeField(null=True)
     capture_count = models.IntegerField(default=0)
+    has_problem = models.BooleanField(default=False)
 
     added = models.DateTimeField(auto_now_add=True)
 
