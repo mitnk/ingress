@@ -1,5 +1,5 @@
 {% extends "ingress/base.html" %}
-{% block title %}{{ portal.name }} on Map{% endblock %}
+{% block title %}{{ portal.name }} Portal{% endblock %}
 {% block meta %}
     <link rel="stylesheet" href="/media/css/cbracco.css">
 {% endblock %}
@@ -7,7 +7,7 @@
 
 {% block content %}
 <div style="padding-left: 20px;">
-    <h1>{{ portal.name }} on Map</h1>
+    <h1>Portal Detail for {{ portal.name }}</h1>
 
 
 {% if portal.updated %}
