@@ -118,3 +118,7 @@ h1 {font-size:1.4em;}
 .bg-mod-empty {
     background-color: #bbb;
 }
+
+.td-borderred {
+    border-bottom: 1px solid #BBB !important;
+}
