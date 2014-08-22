@@ -3,9 +3,11 @@ from . import views
 
 urlpatterns = patterns('',
     url(r'^$', views.home, name='ingress_home'),
+
     url(r'^actions/$', views.actions, name='ingress_actions'),
     url(r'^actions/player/(\w+)/$', views.actions_player, name='ingress_actions_player'),
     url(r'^actions/portal/([\.\w]+)/$', views.actions_portal, name='ingress_actions_portal'),
+    url(r'^actions/portal/([\.\w]+)/(\w+)/$', views.actions_portal, name='ingress_actions_portal_action'),
 
     url(r'^portals/$', views.portals, name='ingress_portals'),
     url(r'^portals/popular/$', views.portals_popular, name='ingress_portals_popular'),

@@ -35,13 +35,16 @@ def actions_player(request, pid):
     return render(request, "ingress/actions.html", context)
 
 
-def actions_portal(request, guid):
+def actions_portal(request, guid, action_name=None):
     context = {}
     try:
         context['portal'] = Portal.objects.get(guid=guid)
     except Portal.DoesNotExist:
         raise Http404()
-    context['actions'] = Action.objects.filter(portal__guid=guid).order_by('-added')[:100]
+    kwargs = {'portal__guid': guid}
+    if action_name:
+        kwargs['name'] = action_name
+    context['actions'] = Action.objects.filter(**kwargs).order_by('-added')[:100]
     return render(request, "ingress/actions.html", context)
 
 
