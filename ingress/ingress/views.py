@@ -145,6 +145,10 @@ def portals_long_time_hold_enlightened(request):
     context = {}
     result = Portal.objects.filter(team='E').exclude(last_captured=None).order_by('last_captured')[:100]
     others = Portal.objects.filter(team='E', last_captured=None)
+    try:
+        context['max_days_tracked'] = result[0].get_hold_days()
+    except:
+        context['max_days_tracked'] = 0
     context['result'] = result
     context['others'] = others
     context['team'] = 'E'
@@ -155,6 +159,10 @@ def portals_long_time_hold_r(request):
     context = {}
     result = Portal.objects.filter(team='R').exclude(last_captured=None).order_by('last_captured')[:100]
     others = Portal.objects.filter(team='R', last_captured=None)
+    try:
+        context['max_days_tracked'] = result[0].get_hold_days()
+    except:
+        context['max_days_tracked'] = 0
     context['result'] = result
     context['others'] = others
     context['team'] = 'R'
