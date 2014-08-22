@@ -14,7 +14,10 @@ def ParseReplyProc(res):
     else:
         team = models.Player.get_team(pid[1:])
         _CACHE[pid[1:]] = team
-    return '<span class="c-{}">{}</span>'.format(team, pid)
+    if team == 'N':
+        return '<span class="c-{}">{}</span>'.format(team, pid)
+    else:
+        return '<a href="/actions/player/{}/"><span class="c-{}">{}</span></a>'.format(pid[1:], team, pid)
 
 
 @register.filter
