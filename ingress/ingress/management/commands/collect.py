@@ -65,7 +65,7 @@ class Command(BaseCommand):
             return
 
         _D['_'] += 1
-        if _D['_'] > 4:
+        if _D['_'] > 8:
             return
 
         timems = get_timems_last_minute()
