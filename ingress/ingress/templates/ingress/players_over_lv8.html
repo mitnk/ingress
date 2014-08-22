@@ -25,12 +25,16 @@
             </td>
             <td>
                 {% if pe %}
+                <a href="/actions/player/{{ pe.id }}/">
                     <span class="c-{{ pe.team }}">{{ pe.id }}</span>
+                </a>
                 {% endif %}
             </td>
             <td>
                 {% if pr %}
+                <a href="/actions/player/{{ pr.id }}/">
                     <span class="c-{{ pr.team }}">{{ pr.id }}</span>
+                </a>
                 {% endif %}
             </td>
         </tr>
