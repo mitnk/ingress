@@ -4,7 +4,7 @@ from django.db.models import Sum
 from django.utils.timezone import now
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from .models import Player, Portal, Action, MU
+from .models import Player, Portal, Action, MU, Message
 
 
 def home(request):
@@ -160,3 +160,15 @@ def portals_long_time_hold_r(request):
 
 def about(request):
     return render(request, "ingress/about.html")
+
+
+def messages(request):
+    context = {}
+    dt = now() - datetime.timedelta(days=7)
+    timestamp = dt.replace(tzinfo=datetime.timezone.utc).timestamp()
+    result = Message.objects.filter(
+        timestamp__gt=timestamp * 1000,
+        is_secure=False,
+    ).order_by('-timestamp')
+    context['result'] = result
+    return render(request, "ingress/messages.html", context)

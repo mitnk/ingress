@@ -1,0 +1,41 @@
+{% extends "ingress/base.html" %}
+{% block title %}Messages{% endblock %}
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block content %}
+
+{% load ingress_filters %}
+
+<div class="pl-20">
+    <h1>Messages</h1>
+
+    <table class="pure-table pure-table-bordered">
+        <thead>
+        <tr>
+            <th style="width:110px;">Time</th>
+            <th>Agent</th>
+            <th>Message</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for msg in result %}
+        <tr>
+            <td>
+                {{ msg.get_time }}
+            </td>
+            <td>
+                <span class="c-{{ msg.team }}">{{ msg.player }}</span>
+            </td>
+            <td>
+                <span class="cr">{{ msg.get_text|parse_agent_message|safe }}</span>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

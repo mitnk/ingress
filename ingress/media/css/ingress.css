@@ -11,6 +11,7 @@ h1 {font-size:1.4em;}
 .c-E {color: green !important;}
 .c-R {color: blue !important;}
 .c-N {color: #bbb !important;}
+.cr {color: red !important;}
 
 .c-L8 {color:#9627f4 !important;}
 .c-L7 {color:#c124e0 !important;}
@@ -121,4 +122,11 @@ h1 {font-size:1.4em;}
 
 .td-borderred {
     border-bottom: 1px solid #BBB !important;
+}
+
+.external {
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-image: url(/media/img/external-link-icon.png);
+    padding-right: 15px;
 }

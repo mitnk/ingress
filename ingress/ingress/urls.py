@@ -20,6 +20,7 @@ urlpatterns = patterns('',
 
     url(r'^mus/$', views.mus, name='ingress_mus'),
     url(r'^search/$', views.search, name='ingress_search'),
+    url(r'^messages/$', views.messages, name='ingress_messages'),
     url(r'^about/$', views.about, name='ingress_about'),
 
     # this should be removed in the future

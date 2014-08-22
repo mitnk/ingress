@@ -40,6 +40,10 @@ class Portal(models.Model):
         url = 'http://www.ingress.com/intel?latE6={}&lngE6={}&z=17'
         return url.format(self.latE6, self.lngE6)
 
+    def get_actions_url(self):
+        url = '/actions/portal/{}/'
+        return url.format(self.guid)
+
     def get_hold_days(self):
         if not self.last_captured:
             return 'Unknown'
@@ -127,6 +131,14 @@ class Player(models.Model):
     def __unicode__(self):
         return self.id
 
+    @staticmethod
+    def get_team(pid):
+        try:
+            p = Player.objects.get(id=pid)
+            return p.team
+        except Player.DoesNotExist:
+            return 'N'
+
 
 class Action(models.Model):
     guid = models.CharField(max_length=64, primary_key=True)
@@ -143,7 +155,7 @@ class Action(models.Model):
         span =  now().replace(tzinfo=None) - d
         days = span.days
         seconds = span.seconds
-        if days >= 6:
+        if days >= 7:
             return d.strftime('%Y-%m-%d')
         elif days > 1:
             return '{} days ago'.format(days)
@@ -180,3 +192,30 @@ class Message(models.Model):
     timestamp = models.BigIntegerField()
     is_secure = models.BooleanField(default=False)
     added = models.DateTimeField(auto_now_add=True)
+
+    def get_text(self):
+        return ':'.join(self.text.split(':')[1:]).strip()
+
+    def get_time(self):
+        d = datetime.datetime.utcfromtimestamp(self.timestamp // 1000)
+        span =  now().replace(tzinfo=None) - d
+        days = span.days
+        seconds = span.seconds
+        if days >= 7:
+            return d.strftime('%Y-%m-%d')
+        elif days > 1:
+            return '{} days ago'.format(days)
+        elif days == 1:
+            return '1 day ago'
+        elif seconds >= 3600 * 2:
+            return '{} hours ago'.format(seconds // 3600)
+        elif seconds >= 3600:
+            return '1 hour ago'
+        elif seconds >= 60 * 2:
+            return '{} mins ago'.format(seconds // 60)
+        elif seconds >= 60:
+            return '1 min ago'
+        elif seconds > 1:
+            return '{} secs ago'.format(seconds)
+        else:
+            return '1 sec ago'
