@@ -16,12 +16,10 @@ def home(request):
 
 
 def actions(request):
-    pid = request.GET.get('pid')
     context = {}
-    if pid:
-        context['actions'] = Action.objects.filter(player__id=pid).order_by('-added')[:100]
-    else:
-        context['actions'] = Action.objects.order_by('-added')[:100]
+    one_month_ago = now() - datetime.timedelta(days=30)
+    context['actions'] = Action.objects.filter(added__gt=one_month_ago) \
+        .order_by('-added')[:100]
     return render(request, "ingress/actions.html", context)
 
 
@@ -31,7 +29,11 @@ def actions_player(request, pid):
         context['player'] = Player.objects.get(id=pid)
     except Player.DoesNotExist:
         raise Http404()
-    context['actions'] = Action.objects.filter(player__id=pid).order_by('-added')[:100]
+    one_month_ago = now() - datetime.timedelta(days=30)
+    context['actions'] = Action.objects.filter(
+        player__id=pid,
+        added__gt=one_month_ago,
+    ).order_by('-added')[:100]
     return render(request, "ingress/actions.html", context)
 
 
@@ -41,7 +43,8 @@ def actions_portal(request, guid, action_name=None):
         context['portal'] = Portal.objects.get(guid=guid)
     except Portal.DoesNotExist:
         raise Http404()
-    kwargs = {'portal__guid': guid}
+    one_month_ago = now() - datetime.timedelta(days=30)
+    kwargs = {'portal__guid': guid, 'added__gt': one_month_ago}
     if action_name:
         kwargs['name'] = action_name
     context['actions'] = Action.objects.filter(**kwargs).order_by('-added')[:100]

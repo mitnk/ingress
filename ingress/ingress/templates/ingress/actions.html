@@ -58,6 +58,17 @@
     {% endfor %}
     </tbody>
 </table>
-
 </div>
+
+{% if player or portal %}
+<div class="pure-g">
+    <div class="pure-u-1-1 pl-20 gray mt-40">
+        <ol>
+            <li>Actions before 30 days ago will not be shown</li>
+            <li>Only as max as 100 actions are shown</li>
+        </ol>
+    </div>
+</div>
+{% endif %}
+
 {% endblock %}
