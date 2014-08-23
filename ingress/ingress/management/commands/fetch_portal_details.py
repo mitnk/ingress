@@ -6,12 +6,11 @@ import time
 
 from urllib.request import urlretrieve
 from django.core.management.base import BaseCommand
-from django.conf import settings
 from django.db.models import Q
 from django.utils.timezone import now
 from ingress.ingress.models import Portal
 
-from .utils import HEADERS, cookie_need_update
+from .utils import HEADERS, cookie_need_update, PAYLOAD_V
 
 
 class Command(BaseCommand):
@@ -23,7 +22,7 @@ class Command(BaseCommand):
             'b': '',
             'c': '',
             'guid': guid,
-            'v': settings.INGRESS_INTEL_PAYLOAD_V,
+            'v': PAYLOAD_V,
         }
 
     def is_a_bad_portal(self, r):
