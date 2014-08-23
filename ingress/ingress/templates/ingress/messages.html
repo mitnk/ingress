@@ -27,7 +27,9 @@
                 {{ msg.get_time }}
             </td>
             <td>
-                <span class="c-{{ msg.team }}">{{ msg.player }}</span>
+                <a href="/actions/player/{{ msg.player }}/">
+                    <span class="c-{{ msg.team }}">{{ msg.player }}</span>
+                </a>
             </td>
             <td>
                 <span class="cr">{{ msg.get_text|parse_agent_message|safe }}</span>
