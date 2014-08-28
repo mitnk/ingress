@@ -94,6 +94,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "ingress/media/")
 GOOGLE_APP_SECRET_KEY = 'xxx'
 BAIDU_APP_SECRET_KEY = 'xxx'
 
+SHOW_LONG_TERM_PORTALS = True
+
 DIR_PORTAL_MAPS = os.path.join(BASE_DIR, 'ingress/media/img/map/')
 
 DIR_HOME = os.path.expanduser("~")

@@ -1,5 +1,6 @@
 import datetime
 from itertools import cycle, zip_longest
+from django.conf import settings
 from django.db.models import Sum
 from django.utils.timezone import now
 from django.http import HttpResponse, Http404
@@ -145,6 +146,9 @@ def portals_popular(request):
 
 
 def portals_long_time_hold_enlightened(request):
+    if not settings.SHOW_LONG_TERM_PORTALS:
+        raise Http404()
+
     context = {}
     result = Portal.objects.filter(team='E').exclude(last_captured=None).order_by('last_captured')[:100]
     others = Portal.objects.filter(team='E', last_captured=None)
@@ -158,7 +162,10 @@ def portals_long_time_hold_enlightened(request):
     return render(request, "ingress/portals_long_time_hold.html", context)
 
 
-def portals_long_time_hold_r(request):
+def portals_long_time_hold_resistance(request):
+    if not settings.SHOW_LONG_TERM_PORTALS:
+        raise Http404()
+
     context = {}
     result = Portal.objects.filter(team='R').exclude(last_captured=None).order_by('last_captured')[:100]
     others = Portal.objects.filter(team='R', last_captured=None)
