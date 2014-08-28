@@ -44,6 +44,11 @@ class Portal(models.Model):
         url = '/actions/portal/{}/'
         return url.format(self.guid)
 
+    def get_baidu_map_url(self):
+        url = 'http://api.map.baidu.com/marker' \
+              '?location={},{}&title={}&content={}&output=html'
+        return url.format(self.rlat, self.rlng, self.name, self.owner)
+
     def get_hold_days(self):
         if not self.last_captured:
             return 'Unknown'
