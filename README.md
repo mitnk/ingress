@@ -1,5 +1,12 @@
-Ingress Beijing
-==============
+Ingress Intel for Your City
+===========================
+
+
+Rules You Should Follow When Using this Project
+-----------------------------------------------
+
+- Only collect one city on one server except the Ingress actions in collecting area is very few.
+- Request once or less per minitues
 
 
 Requirements
@@ -58,3 +65,9 @@ INGRESS_INTEL_PAYLOAD_V = ""
 如果输出是些 JSON 结构、说明测试成功，否则继续做好1、2、3步里的操作。
 
 Use `python3 manage.py help` to see other ingress commands.
+
+
+Existing Sites
+--------------
+
+Ingress Beijing China - [http://ingress.mitnk.com](http://ingress.mitnk.com)
