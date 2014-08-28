@@ -6,7 +6,7 @@ Rules You Should Follow When Using this Project
 -----------------------------------------------
 
 - Only collect one city on one server except the Ingress actions in collecting area are very few.
-- Request once or less per minitue
+- Request once or less per minute
 
 
 Requirements
