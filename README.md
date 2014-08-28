@@ -58,6 +58,15 @@ INGRESS_INTEL_CSRF_TOKEN = ""
 INGRESS_INTEL_PAYLOAD_V = ""
 ```
 
+并将以下坐标范围改成你所在城市的 （用Google地图可以看经纬）
+
+```
+MIN_LAT = 40011769
+MAX_LAT = 40011769
+MIN_LNG = 116401091
+MAX_LNG = 116401091
+```
+
 
 然后就可以测试使用了：
 
