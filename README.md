@@ -5,7 +5,7 @@ Ingress Intel for Your City
 Rules You Should Follow When Using this Project
 -----------------------------------------------
 
-- Only collect one city on one server except the Ingress actions in collecting area is very few.
+- Only collect one city on one server except the Ingress actions in collecting area are very few.
 - Request once or less per minitues
 
 
@@ -14,7 +14,7 @@ Requirements
 - Python 3.4+
 - Django 1.7rc1+
 
-- psycopg2
+- psycopg2 (if you want to use PostgreSQL)
 - requests
 
 
