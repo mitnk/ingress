@@ -47,7 +47,7 @@ Usage
 
 1. 创建一个 `settings_local.py` 文件（与`settings.py`同目录）
 
-2. 在Intel里登录自己的Ingress账号（最好是小号），然后用Chrome的Inspect Element
+2. 在Intel里登录自己的Ingress账号（有可能被封哟），然后用Chrome的Inspect Element
 功能查看请求 `POST /r/getPlexts` 的Request Header 里找步骤3里需要的值
 
 3. 在 `settings_local.py` 里填写好以下值
