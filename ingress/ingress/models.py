@@ -1,3 +1,4 @@
+from urllib.parse import quote
 import datetime
 from django.db import models
 from django.utils.timezone import now
@@ -47,7 +48,8 @@ class Portal(models.Model):
     def get_baidu_map_url(self):
         url = 'http://api.map.baidu.com/marker' \
               '?location={},{}&title={}&content={}&output=html'
-        return url.format(self.rlat, self.rlng, self.name, self.owner)
+        return url.format(self.rlat, self.rlng,
+            quote(self.name), self.owner)
 
     def get_hold_days(self):
         if not self.last_captured:
