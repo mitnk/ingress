@@ -10,6 +10,7 @@ Rules You Should Follow When Using this Project
 
 
 Requirements
+------------
 
 - Python 3.4+
 - Django 1.7rc1+
