@@ -6,9 +6,10 @@
 
 
 {% block content %}
+{% include "ingress/forkme.html" %}
 
 {% if result %}
-<div class="pl-20">
+<div class="pl-20 mt-20">
     <table class="pure-table">
         <thead>
         <tr>
@@ -41,7 +42,7 @@
     </table>
 </div>
 {% else %}
-    <div class="pl-30">
+    <div class="pl-30 mt-40">
         <form class="pure-form" method="post" action=".">
             <input name="name_to_search" placeholder="player name or portal name" type="text" class="pure-input-rounded" autofocus="autofocus">
             <button type="submit" class="pure-button">Search</button>
