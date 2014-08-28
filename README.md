@@ -6,7 +6,8 @@ Rules You Should Follow When Using this Project
 -----------------------------------------------
 
 - Only collect one city on one server except the Ingress actions in collecting area are very few.
-- Request once or less per minute
+- Request once or less per minute (once every 5 or 10 minutes may satisfy small citys)
+- Do not show old actions info for any agents (like data 90 days ago)
 
 
 Requirements
