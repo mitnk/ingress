@@ -56,16 +56,21 @@ class Command(BaseCommand):
             logging.info(r.text)
 
     def handle(self, *args, **options):
+        portals = []
         old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 6)
-        portals = Portal.objects.filter(level=8, updated__lt=old_datetime) \
+        portals_lv8 = Portal.objects.filter(level=8, updated__lt=old_datetime) \
             .exclude(has_problem=True)
-        if not portals:
-            portals = Portal.objects.filter(updated=None) \
-                .exclude(has_problem=True)[:20]
-        if not portals:
-            portals = Portal.objects.filter(updated__lt=old_datetime) \
-                .exclude(has_problem=True).order_by('updated')[:20]
-        total = portals.count()
+        portals += [x for x in portals_lv8]
+
+        portals_not_updated = Portal.objects.filter(updated=None) \
+            .exclude(has_problem=True)[:20]
+        portals += [x for x in portals_not_updated]
+
+        portals_oldest = Portal.objects.filter(updated__lt=old_datetime) \
+            .exclude(has_problem=True).order_by('updated')[:20]
+        portals += [x for x in portals_oldest]
+
+        total = len(portals)
         i = 1
         for po in portals:
             _t = time.time()
