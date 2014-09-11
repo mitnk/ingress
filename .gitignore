@@ -3,5 +3,6 @@
 *.log
 *.png
 settings_local.py
+*.sqlite3
 map
 map/
