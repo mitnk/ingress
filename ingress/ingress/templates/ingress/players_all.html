@@ -1,0 +1,45 @@
+{% extends "ingress/base.html" %}
+{% block title %}Player List{% endblock %}
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="pl-20 mt-20">
+    <h1>All Players</h1>
+    <table class="pure-table pure-table-bordered">
+        <thead>
+        <tr>
+            <th>Index</th>
+            <th>Enlightened</th>
+            <th>Resistance</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for pe, pr in result %}
+        <tr>
+            <td>
+                {{ forloop.counter }}
+            </td>
+            <td>
+                {% if pe %}
+                <a href="/actions/player/{{ pe.id }}/">
+                    <span class="c-{{ pe.team }}">{{ pe.id }}</span>
+                </a>
+                {% endif %}
+            </td>
+            <td>
+                {% if pr %}
+                <a href="/actions/player/{{ pr.id }}/">
+                    <span class="c-{{ pr.team }}">{{ pr.id }}</span>
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
