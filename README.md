@@ -42,6 +42,12 @@ make && sudo make install
 ```
 
 
+Setup Django
+------------
+
+See [Setup Django for Python 3](https://github.com/mitnk/ingress/blob/master/setup_django_for_python3.md) for details.
+
+
 Usage
 -----
 
@@ -66,13 +72,33 @@ MIN_LNG = 141825375
 MAX_LNG = 146483578
 ```
 
-Then we're ready to go：
+4. Then we're ready to go (every time you run it, please make sure remove `~/.ingress/need_update.txt`)：
 
 `python3 manage.py test_collect`
 
 If you see some JSON-like outputs, then we are succeed. Otherwise, Please do step 1, 2, 3 again.
 
-Use `python3 manage.py help` to see other ingress commands.
+5. Database migrations
+
+```
+python3.4 manage.py migrate
+```
+
+6. Collect for real
+
+```
+python3 manage.py collect
+```
+
+7. Run Server and see.
+
+```
+python3 manage.py runserver 8080
+```
+
+Open browser to see `http://127.0.0.1:8080/`
+
+8. Use `python3 manage.py help` to see other ingress commands.
 
 
 Existing Sites

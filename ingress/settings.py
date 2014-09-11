@@ -62,8 +62,8 @@ WSGI_APPLICATION = 'ingress.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': '',
-        'NAME': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -102,9 +102,9 @@ DIR_HOME = os.path.expanduser("~")
 DIR_INGRESS_CONF = os.path.join(DIR_HOME, '.ingress')
 
 # Change the following to real values in settings_local.py
-MIN_LAT = 40011769
-MAX_LAT = 40011769
-MIN_LNG = 116401091
-MAX_LNG = 116401091
+MIN_LAT = 41636215
+MAX_LAT = 43761852
+MIN_LNG = 141825375
+MAX_LNG = 146483578
 
 from .settings_local import *
