@@ -1,3 +1,4 @@
+import os
 import logging
 import time
 from django.conf import settings
@@ -21,6 +22,8 @@ def set_min_timems(ms):
 
 
 def get_min_timems():
+    if not os.path.exists(TEMP_FILE):
+        return 0
     with open(TEMP_FILE, 'r') as f:
         try:
             ms = int(f.read().strip())
@@ -29,27 +32,29 @@ def get_min_timems():
     return ms
 
 
-def get_timems_last_minute():
-    one_hour_ago = int(time.time() * 1000 - settings.MAX_HOURS_TO_FETCH * 1000)
+def get_timestamp_start():
+    count_seconds = settings.MAX_HOURS_TO_FETCH * 60 * 60
+    hours_ago = int(time.time() * 1000 - count_seconds * 1000)
     try:
         # we must +1 for this, since sometimes a lot of items with same timestamp
         # so that we got endless loop then.
         max_timems = Action.objects.order_by('-timestamp')[0].timestamp + 1
-        if one_hour_ago > max_timems:
-            return one_hour_ago
+        if hours_ago > max_timems:
+            return hours_ago
         min_timems = get_min_timems()
-        elif min_timems > max_timems:
+        if min_timems > max_timems:
             return min_timems
         return max_timems
     except:
-        return one_hour_ago
+        return hours_ago
 
 
 def get_or_create_portal(portal):
     latE6=portal['latE6']
     lngE6=portal['lngE6']
     if not within_range(latE6, lngE6):
-        logging.info('found a stranger portal, ignored')
+        logging.error('found a outside portal ({}, {}), ignored'.format(
+                      latE6, lngE6))
         return None
 
     try:
@@ -81,7 +86,7 @@ class Command(BaseCommand):
         if _D['_'] > 8:
             return
 
-        timems = get_timems_last_minute()
+        timems = get_timestamp_start()
         print('==={} ({:.0f} seconds ago)'.format(timems, time.time() - (timems / 1000)))
 
         plexts = utils.get_plexts(timems)
