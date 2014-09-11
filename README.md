@@ -13,6 +13,7 @@ Rules You Should Follow When Using this Project
 Requirements
 ------------
 
+- Unix/Linux (Windows is strongly not recommended)
 - Python 3.4+
 - Django 1.7+
 - requests
@@ -70,11 +71,11 @@ MIN_LNG = 141825375
 MAX_LNG = 146483578
 ```
 
-4) Then we're ready to go (every time you run it, please make sure remove `~/.ingress/need_update.txt` if it exists)：
+4) Then we're ready to go (every time you run it, please **make sure** remove `~/.ingress/need_update.txt` if it exists)：
 
 `python3 manage.py test_collect`
 
-If you see some JSON-like outputs, then we are succeed. Otherwise, Please do step 1, 2, 3 again.
+If you see some JSON-like outputs, then we are succeed. Otherwise, Please do step 2 and step 3 again.
 
 5) Database migrations
 
@@ -85,18 +86,18 @@ python3.4 manage.py migrate
 6) Collect for real
 
 ```
-python3 manage.py collect
+python3.4 manage.py collect
 ```
 
 7) Run Server and see.
 
 ```
-python3 manage.py runserver 8080
+python3.4 manage.py runserver 8080
 ```
 
 Open browser to see `http://127.0.0.1:8080/`
 
-8) Use `python3 manage.py help` to see other ingress commands.
+8) Use `python3.4 manage.py help` to see other ingress commands.
 
 
 Existing Sites
