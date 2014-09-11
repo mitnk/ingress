@@ -1,5 +1,6 @@
 import logging
 import time
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.utils.timezone import now
 from ingress.ingress.models import Portal, Action, Player, MU, Message
@@ -9,24 +10,36 @@ from . import utils
 
 _D = {
     '_': 0,
-    'min_timems': 1406513783823,
 }
 
+TEMP_FILE = '/tmp/mitnk-ingress-min-time-ms'
 
-def get_n_seconds_ago(n):
-    return int(time.time() * 1000 - n * 1000)
+
+def set_min_timems(ms):
+    with open(TEMP_FILE, 'w') as f:
+        f.write(str(ms))
+
+
+def get_min_timems():
+    with open(TEMP_FILE, 'r') as f:
+        try:
+            ms = int(f.read().strip())
+        except ValueError:
+            ms = 0
+    return ms
 
 
 def get_timems_last_minute():
-    one_hour_ago = get_n_seconds_ago(60 * 60 * 24)
+    one_hour_ago = int(time.time() * 1000 - settings.MAX_HOURS_TO_FETCH * 1000)
     try:
         # we must +1 for this, since sometimes a lot of items with same timestamp
         # so that we got endless loop then.
         max_timems = Action.objects.order_by('-timestamp')[0].timestamp + 1
         if one_hour_ago > max_timems:
             return one_hour_ago
-        elif _D['min_timems'] > max_timems:
-            return _D['min_timems']
+        min_timems = get_min_timems()
+        elif min_timems > max_timems:
+            return min_timems
         return max_timems
     except:
         return one_hour_ago
@@ -82,8 +95,9 @@ class Command(BaseCommand):
                 'guid': item[0],
                 'timestamp': item[1],
             }
-            if _D['min_timems'] < item[1]:
-                _D['min_timems'] = item[1]
+            min_timems = get_min_timems()
+            if min_timems < item[1]:
+                set_min_timems(item[1])
             if 'plext' not in item[2] \
                     or 'markup' not in item[2]['plext']:
                 continue
