@@ -15,8 +15,6 @@ Requirements
 
 - Python 3.4+
 - Django 1.7+
-
-- psycopg2 (if you want to use PostgreSQL)
 - requests
 
 
