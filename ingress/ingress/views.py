@@ -108,9 +108,9 @@ def mus(request):
     count_R = MU.objects.filter(team='R', added__gt=dt).aggregate(points=Sum('points'))['points']
     context = {
         'count_E': count_E,
-        'count_E_with_comma': '{:,d}'.format(count_E),
+        'count_E_with_comma': '{:,d}'.format(count_E or 0),
         'count_R': count_R,
-        'count_R_with_comma': '{:,d}'.format(count_R),
+        'count_R_with_comma': '{:,d}'.format(count_R or 0),
         'title': 'MUs',
         'mus_now': d,
         'is_mus': True,
