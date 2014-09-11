@@ -13,10 +13,9 @@ Rules You Should Follow When Using this Project
 Requirements
 ------------
 
+- Unix/Linux (Windows is strongly not recommended)
 - Python 3.4+
-- Django 1.7rc1+
-
-- psycopg2 (if you want to use PostgreSQL)
+- Django 1.7+
 - requests
 
 
@@ -32,26 +31,30 @@ sudo apt-get install build-essential libsqlite3-dev sqlite3 bzip2 libbz2-dev zli
 
 And then:
 
-(Replace 3.3.2 to latest version)
-
 ```
-wget http://python.org/ftp/python/3.3.2/Python-3.3.2.tar.bz2 && \
-tar jxf ./Python-3.3.2.tar.bz2 && \
-cd ./Python-3.3.2
+wget https://www.python.org/ftp/python/3.4.1/Python-3.4.1.tar.xz && \
+tar xf ./Python-3.4.1.tar.xz && \
+cd ./Python-3.4.1
+
 ./configure
 make && sudo make install
 ```
 
 
+Setup Django
+------------
+
+See [Setup Django for Python 3](https://github.com/mitnk/ingress/blob/master/setup_django_for_python3.md) for details.
+
+
 Usage
 -----
 
-1. 创建一个 `settings_local.py` 文件（与`settings.py`同目录）
+1) Create a file called `settings_local.py` under the same directory as `settings.py`.
 
-2. 在Intel里登录自己的Ingress账号（有可能被封哟），然后用Chrome的Inspect Element
-功能查看请求 `POST /r/getPlexts` 的Request Header 里找步骤3里需要的值
+2) Login your Ingress account (may be banned :-( ) in Google Chrome browser. Use Chrome's [Inspect Element](https://developer.chrome.com/devtools) to find out the [Request Headers](https://developer.chrome.com/devtools/docs/network#http-headers) of request `POST /r/getPlexts`, which will needed in step 3.
 
-3. 在 `settings_local.py` 里填写好以下值
+3) Edit the following values in `settings_local.py`:
 
 ```
 INGRESS_INTEL_COOKIE = ""
@@ -59,23 +62,42 @@ INGRESS_INTEL_CSRF_TOKEN = ""
 INGRESS_INTEL_PAYLOAD_V = ""
 ```
 
-并将以下坐标范围改成你所在城市的 （用Google地图可以看经纬）
+and update the region range（You can find the Lat/Lng with [Google Map](https://www.google.com/maps/preview) ):
 
 ```
-MIN_LAT = 40011769
-MAX_LAT = 40011769
-MIN_LNG = 116401091
-MAX_LNG = 116401091
+MIN_LAT = 41636215
+MAX_LAT = 43761852
+MIN_LNG = 141825375
+MAX_LNG = 146483578
 ```
 
-
-然后就可以测试使用了：
+4) Then we're ready to go (every time you run it, please **make sure** remove `~/.ingress/need_update.txt` if it exists)：
 
 `python3 manage.py test_collect`
 
-如果输出是些 JSON 结构、说明测试成功，否则继续做好1、2、3步里的操作。
+If you see some JSON-like outputs, then we are succeed. Otherwise, Please do step 2 and step 3 again.
 
-Use `python3 manage.py help` to see other ingress commands.
+5) Database migrations
+
+```
+python3.4 manage.py migrate
+```
+
+6) Collect for real
+
+```
+python3.4 manage.py collect
+```
+
+7) Run Server and see.
+
+```
+python3.4 manage.py runserver 8080
+```
+
+Open browser to see `http://127.0.0.1:8080/`
+
+8) Use `python3.4 manage.py help` to see other ingress commands.
 
 
 Existing Sites
