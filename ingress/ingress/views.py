@@ -101,6 +101,15 @@ def players_top(request):
     return render(request, "ingress/players_top.html", context)
 
 
+def players_all(request):
+    list_E = Player.objects.filter(team='E').order_by('id')
+    list_R = Player.objects.filter(team='R').order_by('id')
+    context = {}
+    result = zip_longest(list_E, list_R)
+    context['result'] = result
+    return render(request, "ingress/players_all.html", context)
+
+
 def mus(request):
     d = now()
     dt = datetime.datetime(d.year, d.month, 1, 0, 0, 0)
