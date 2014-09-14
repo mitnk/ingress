@@ -73,6 +73,9 @@ class Command(BaseCommand):
         total = len(portals)
         i = 1
         for po in portals:
+            if not po.has_real_guid:
+                continue
+
             _t = time.time()
 
             details = self.get_portal_details(po)
