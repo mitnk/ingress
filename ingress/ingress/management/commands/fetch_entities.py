@@ -19,12 +19,13 @@ def get_or_create_portal(portal):
             lngE6=portal['lngE6'],
             has_problem=False,
         )
-        obj_portal.name=portal['name']
-        obj_portal.team=portal['team'][0]
-        obj_portal.latE6=portal['latE6']
-        obj_portal.lngE6=portal['lngE6']
-        obj_portal.level=portal['level']
-        obj_portal.image=portal['image']
+        obj_portal.guid = portal['guid']
+        obj_portal.name = portal['name']
+        obj_portal.team = portal['team'][0]
+        obj_portal.latE6 = portal['latE6']
+        obj_portal.lngE6 = portal['lngE6']
+        obj_portal.level = portal['level']
+        obj_portal.image = portal['image']
         obj_portal.has_real_guid = True
         obj_portal.save()
     except Portal.DoesNotExist:
@@ -36,7 +37,7 @@ def get_or_create_portal(portal):
             lngE6=portal['lngE6'],
             level=portal['level'],
             image=portal['image'],
-            has_real_guid = True,
+            has_real_guid=True,
         )
     return obj_portal
 
