@@ -27,6 +27,19 @@ def get_tile_key(lat, lng):
     return s.format(k_lng, k_lat)
 
 
+def get_all_tile_keys():
+    d = {}
+    lat = settings.MIN_LAT
+    for lat in range(settings.MIN_LAT, settings.MAX_LAT, 10000):
+        for lng in range(settings.MIN_LNG, settings.MAX_LNG, 10000):
+            tile_key = get_tile_key(lat, lng)
+            if tile_key not in d:
+                d[tile_key] = 1
+    all_tile_keys = list(d.keys())
+    all_tile_keys.sort()
+    return all_tile_keys
+
+
 def get_portal_tile_key(portal):
     return get_tile_key(portal.latE6, portal.lngE6)
 

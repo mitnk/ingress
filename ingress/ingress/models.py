@@ -232,3 +232,9 @@ class Message(models.Model):
             return '{} secs ago'.format(seconds)
         else:
             return '1 sec ago'
+
+
+class Tile(models.Model):
+    key = models.CharField(max_length=40)
+    portal_count = models.IntegerField(default=0)
+    updated = models.DateTimeField(auto_now=True)
