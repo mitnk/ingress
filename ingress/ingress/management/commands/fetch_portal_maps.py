@@ -1,3 +1,4 @@
+import os.path
 import time
 from urllib.request import urlretrieve
 from django.core.management.base import BaseCommand
@@ -57,22 +58,41 @@ class Command(BaseCommand):
         urlretrieve(url, path)
 
     def handle(self, *args, **options):
-        portals = Portal.objects.filter(has_maps=False).exclude(rlat='').order_by('-added')[:100]
+        portals = Portal.objects.filter(
+            has_maps=False,
+        ).exclude(rlat='').order_by('-added')[:100]
         total = portals.count()
+        if total == 0:
+            print('No portals need to fetch maps')
+            return
+
         i = 1
         for po in portals:
             _t = time.time()
-            map_out_url = self.get_cn_map_url(po, 12)
-            map_out_path = self.get_map_path(po, 'out')
-            self.save_image(map_out_url, map_out_path)
+            image_path = self.get_map_path(po, 'out')
+            if os.path.exists(image_path) \
+                    and os.path.getsize(image_path) > 2000:
+                print('{} already has out map image, ignored'.format(po.name))
+            else:
+                map_out_url = self.get_cn_map_url(po, 12)
+                self.save_image(map_out_url, image_path)
 
-            map_in_url = self.get_cn_map_url(po, 16)
-            map_in_path = self.get_map_path(po, 'in')
-            self.save_image(map_in_url, map_in_path)
+            image_path = self.get_map_path(po, 'in')
+            if os.path.exists(image_path) \
+                    and os.path.getsize(image_path) > 2000:
+                print('{} already has out map image, ignored'.format(po.name))
+            else:
+                map_in_url = self.get_cn_map_url(po, 16)
+                self.save_image(map_in_url, image_path)
 
-            map_in_satellite_url = self.get_map_url(po, 16, satellite=True)
-            map_in_satellite_path = self.get_map_path(po, 'in_sat')
-            self.save_image(map_in_satellite_url, map_in_satellite_path)
+            image_path = self.get_map_path(po, 'in_sat')
+            if os.path.exists(image_path) \
+                    and os.path.getsize(image_path) > 2000:
+                print('{} already has out map image, ignored'.format(po.name))
+            else:
+                map_in_satellite_url = self.get_map_url(po, 16, satellite=True)
+                self.save_image(map_in_satellite_url, image_path)
+
             po.has_maps = True
             po.save()
 

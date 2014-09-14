@@ -58,24 +58,34 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         portals = []
         old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 6)
-        portals_lv8 = Portal.objects.filter(level=8, updated__lt=old_datetime) \
-            .exclude(has_problem=True)
+        portals_lv8 = Portal.objects.filter(
+            level=8,
+            updated__lt=old_datetime,
+            has_real_guid=True,
+            has_problem=False,
+        )
         portals += [x for x in portals_lv8]
 
-        portals_not_updated = Portal.objects.filter(updated=None) \
-            .exclude(has_problem=True)[:20]
+        portals_not_updated = Portal.objects.filter(
+            updated=None,
+            has_real_guid=True,
+            has_problem=False,
+        )[:20]
         portals += [x for x in portals_not_updated]
 
-        portals_oldest = Portal.objects.filter(updated__lt=old_datetime) \
-            .exclude(has_problem=True).order_by('updated')[:20]
+        portals_oldest = Portal.objects.filter(
+            updated__lt=old_datetime,
+            has_real_guid=True,
+            has_problem=False,
+        ).order_by('updated')[:20]
         portals += [x for x in portals_oldest]
+        if not portals:
+            print('No Portals need to fetch details')
+            return
 
         total = len(portals)
         i = 1
         for po in portals:
-            if not po.has_real_guid:
-                continue
-
             _t = time.time()
 
             details = self.get_portal_details(po)

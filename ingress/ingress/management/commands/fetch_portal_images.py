@@ -1,3 +1,4 @@
+import os.path
 import time
 from urllib.request import urlretrieve
 from django.core.management.base import BaseCommand
@@ -19,14 +20,23 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         portals = Portal.objects.filter(
             image_fetched=False,
+            has_real_guid=True,
         ).exclude(image='')[:20]
+        if not portals:
+            print('No portals need to fetch images')
+            return
+
         total = portals.count()
         i = 1
         for po in portals:
             _t = time.time()
 
             image_path = self.get_image_path(po)
-            self.save_image(po.image, image_path)
+            if os.path.exists(image_path) \
+                    and os.path.getsize(image_path) > 2000:
+                print('{} already has image, ignored'.format(po.name))
+            else:
+                self.save_image(po.image, image_path)
             po.image_fetched = True
             po.save()
 
