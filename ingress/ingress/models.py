@@ -5,7 +5,7 @@ from django.utils.timezone import now
 
 
 class Portal(models.Model):
-    guid = models.CharField(max_length=40, primary_key=True)
+    guid = models.CharField(max_length=40, db_index=True)
     name = models.CharField(max_length=256)
     team = models.CharField(max_length=1, db_index=True)
     owner = models.CharField(max_length=40, blank=True)

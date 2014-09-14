@@ -131,9 +131,17 @@ def search(request):
     context = {}
     if request.method == "POST":
         text = request.POST.get('name_to_search', '')[:40]
-        players = Player.objects.filter(id__icontains=text)[:40] or ['']
-        portals = Portal.objects.filter(name__icontains=text) \
-            .exclude(has_problem=True)[:40] or ['']
+        players = Player.objects.filter(id__icontains=text)[:50] or ['']
+
+        portals = []
+        result_exact = Portal.objects.filter(name__iexact=text) \
+            .exclude(has_problem=True)[:20] or ['']
+        result_contain = Portal.objects.filter(name__icontains=text) \
+            .exclude(has_problem=True) \
+            .exclude(name__iexact=text)[:80] or ['']
+        portals += [x for x in result_exact]
+        portals += [x for x in result_contain]
+
         result = zip_longest(players, portals)
         context['result'] = result
     return render(request, "ingress/search.html", context)
