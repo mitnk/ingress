@@ -102,9 +102,11 @@ DIR_HOME = os.path.expanduser("~")
 DIR_INGRESS_CONF = os.path.join(DIR_HOME, '.ingress')
 
 # Change the following to real values in settings_local.py
-MIN_LAT = 41636215
-MAX_LAT = 43761852
-MIN_LNG = 141825375
-MAX_LNG = 146483578
+MIN_LAT = 41338288
+MAX_LAT = 45647294
+MIN_LNG = 139141052
+MAX_LNG = 146150330
+
+MAX_HOURS_TO_FETCH = 1
 
 from .settings_local import *

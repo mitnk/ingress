@@ -53,6 +53,7 @@ def get_region_map_url():
         "lat_center": "{:.6f}".format((settings.MIN_LAT + settings.MAX_LAT) / 2 * 1000000.0),
         "lng_center": "{:.6f}".format((settings.MIN_LNG + settings.MAX_LNG) / 2 * 1000000.0),
     }
+    # Sometimes we need to change the zoom to get the correct image
     url = "http://maps.googleapis.com/maps/api/staticmap" \
           "?size=600x600&center={lat_center},{lng_center}&zoom=9" \
           "&path=weight:2|fillcolor:0xFFFF0033" \

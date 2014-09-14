@@ -19,6 +19,7 @@ urlpatterns = patterns('',
     url(r'^players/$', views.players, name='ingress_players'),
     url(r'^players/over_lv8/$', views.players_over_lv8, name='ingress_players_over_lv8'),
     url(r'^players/top/$', views.players_top, name='ingress_players_top'),
+    url(r'^players/all/$', views.players_all, name='ingress_players_all'),
 
     url(r'^mus/$', views.mus, name='ingress_mus'),
     url(r'^search/$', views.search, name='ingress_search'),
