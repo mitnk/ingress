@@ -1,9 +1,11 @@
+import datetime
 import json
 import logging
 import requests
 import time
 
 from django.core.management.base import BaseCommand
+from django.utils.timezone import now
 from ingress.ingress.models import Portal, Tile
 from ingress.ingress.utils import within_range
 
@@ -12,13 +14,18 @@ from .utils import HEADERS, cookie_need_update, PAYLOAD_V
 
 def get_or_create_portal(portal):
     try:
-        obj_portal = Portal.objects.get(pk=portal['guid'])
+        obj_portal = Portal.objects.get(
+            latE6=portal['latE6'],
+            lngE6=portal['lngE6'],
+            has_problem=False,
+        )
         obj_portal.name=portal['name']
         obj_portal.team=portal['team'][0]
         obj_portal.latE6=portal['latE6']
         obj_portal.lngE6=portal['lngE6']
         obj_portal.level=portal['level']
         obj_portal.image=portal['image']
+        obj_portal.has_real_guid = True
         obj_portal.save()
     except Portal.DoesNotExist:
         obj_portal = Portal.objects.create(
@@ -29,6 +36,7 @@ def get_or_create_portal(portal):
             lngE6=portal['lngE6'],
             level=portal['level'],
             image=portal['image'],
+            has_real_guid = True,
         )
     return obj_portal
 
@@ -43,7 +51,11 @@ def get_payload(tileKeys):
 
 
 def get_entities():
-    tiles = Tile.objects.order_by('updated')[:3]
+    old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 24)
+    tiles = Tile.objects.filter(updated__lt=old_datetime).order_by('updated')[:3]
+    if not tiles:
+        return
+
     tileKeys = [x.key for x in tiles]
     payload = get_payload(tileKeys)
 

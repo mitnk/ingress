@@ -1,3 +1,4 @@
+import uuid
 import os
 import logging
 import time
@@ -58,17 +59,22 @@ def get_or_create_portal(portal):
         return None
 
     try:
-        obj_portal = Portal.objects.get(pk=portal['guid'])
+        obj_portal = Portal.objects.get(
+            latE6=latE6,
+            lngE6=lngE6,
+            has_problem=False,
+        )
         if obj_portal.team != portal['team'][0]:
             obj_portal.team = portal['team'][0]
             obj_portal.save()
     except Portal.DoesNotExist:
         obj_portal = Portal.objects.create(
-            guid=portal['guid'],
+            guid=str(uuid.uuid4()),
             name=portal['name'],
             team=portal['team'][0],
             latE6=portal['latE6'],
             lngE6=portal['lngE6'],
+            has_real_guid=False,
         )
     return obj_portal
 
