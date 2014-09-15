@@ -60,7 +60,6 @@ class Command(BaseCommand):
         old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 6)
         portals_lv8 = Portal.objects.filter(
             level=8,
-            updated__lt=old_datetime,
             has_real_guid=True,
             has_problem=False,
         ).filter(Q(updated=None) | Q(updated__lt=old_datetime))
