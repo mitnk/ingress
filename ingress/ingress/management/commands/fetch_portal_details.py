@@ -63,7 +63,7 @@ class Command(BaseCommand):
             updated__lt=old_datetime,
             has_real_guid=True,
             has_problem=False,
-        )
+        ).filter(Q(updated=None) | Q(updated__lt=old_datetime))
         portals += [x for x in portals_lv8]
 
         portals_not_updated = Portal.objects.filter(
