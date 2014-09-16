@@ -57,19 +57,19 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         portals = []
-        old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 6)
+        old_datetime = now() - datetime.timedelta(seconds=60 * 60 * 18)
         portals_lv8 = Portal.objects.filter(
             level=8,
             has_real_guid=True,
             has_problem=False,
-        ).filter(Q(updated=None) | Q(updated__lt=old_datetime))
+        ).filter(Q(updated=None) | Q(updated__lt=old_datetime))[:10]
         portals += [x for x in portals_lv8]
 
         portals_not_updated = Portal.objects.filter(
             updated=None,
             has_real_guid=True,
             has_problem=False,
-        )[:20]
+        )[:10]
         portals += [x for x in portals_not_updated]
 
         portals_oldest = Portal.objects.filter(
