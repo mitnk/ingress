@@ -1,0 +1,40 @@
+{% extends "ingress/base.html" %}
+{% block title %}Top Neutral Area{% endblock %}
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock %}
+
+
+{% block content %}
+
+<div class="pl-20">
+    <h1>Popular Portals</h1>
+
+    <table class="pure-table pure-table-bordered">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>Portal</th>
+            <th>Neutral Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tile in result %}
+        <tr>
+            <td>
+                {{ forloop.counter }}
+            </td>
+            <td>
+                <a href="{{ tile.portal.get_absolute_url }}">
+                    <span class="c-{{ tile.portal.team }}">{{ tile.portal.name }}</span>
+                </a>
+            </td>
+            <td>
+                {{ tile.n_po_count }}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

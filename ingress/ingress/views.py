@@ -5,7 +5,7 @@ from django.db.models import Sum
 from django.utils.timezone import now
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
-from .models import Player, Portal, Action, MU, Message
+from .models import Player, Portal, Action, MU, Message, Tile
 
 
 def home(request):
@@ -210,3 +210,28 @@ def messages(request):
     ).order_by('-timestamp')
     context['result'] = result
     return render(request, "ingress/messages.html", context)
+
+
+def top_tiles(request):
+    tiles = Tile.objects.filter(portal_count__gt=0) \
+        .order_by('-portal_count')[:60]
+    result = []
+    checker = {}
+    for t in tiles:
+        if t.portal not in checker:
+            checker[t.portal] = 1
+            result.append(t)
+    context = {'result': result}
+    return render(request, "ingress/top_tiles.html", context)
+
+
+def top_neutral_tiles(request):
+    tiles = Tile.objects.filter(n_po_count__gt=0).order_by('-n_po_count')[:60]
+    result = []
+    checker = {}
+    for t in tiles:
+        if t.portal not in checker:
+            checker[t.portal] = 1
+            result.append(t)
+    context = {'result': result, 'neutral': True}
+    return render(request, "ingress/top_tiles.html", context)

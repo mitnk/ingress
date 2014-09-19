@@ -16,6 +16,9 @@ urlpatterns = patterns('',
     url(r'^portals/beijing_has_long_time_portals/resistance/$', views.portals_long_time_hold_resistance, name='ingress_portals_long_time_hold_resistance'),
     url(r'^portals/([-\.\w]+)/$', views.portal_detail, name='ingress_portal_detail'),
 
+    url(r'^top_area/$', views.top_tiles, name='ingress_top_tiles'),
+    url(r'^top_neutral_area/$', views.top_neutral_tiles, name='ingress_top_neutral_tiles'),
+
     url(r'^players/$', views.players, name='ingress_players'),
     url(r'^players/over_lv8/$', views.players_over_lv8, name='ingress_players_over_lv8'),
     url(r'^players/top/$', views.players_top, name='ingress_players_top'),
