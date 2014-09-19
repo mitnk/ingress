@@ -8,15 +8,12 @@
 {% block content %}
 
 <div class="pl-20">
-    <h1>Popular Portals</h1>
-
     {% if neutral %}
-        <a href="/top_area/">View Top Portal Area</a>
+        <h1>Top Neutral Portal Area</h1>
     {% else %}
-        <a href="/top_neutral_area/">View Top Neutral Portal Area</a>
+        <h1>Top Portal Area</h1>
     {% endif %}
-    <br>
-    <br>
+
     <table class="pure-table pure-table-bordered">
         <thead>
         <tr>
@@ -51,5 +48,12 @@
         {% endfor %}
         </tbody>
     </table>
+    <br>
+    <br>
+    {% if neutral %}
+        <a href="/top_area/">View Top Portal Area</a>
+    {% else %}
+        <a href="/top_neutral_area/">View Top Neutral Portal Area</a>
+    {% endif %}
 </div>
 {% endblock %}

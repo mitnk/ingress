@@ -214,7 +214,7 @@ def messages(request):
 
 def top_tiles(request):
     tiles = Tile.objects.filter(portal_count__gt=0) \
-        .order_by('-portal_count')[:60]
+        .order_by('-portal_count')[:140]
     result = []
     checker = {}
     for t in tiles:
@@ -226,7 +226,8 @@ def top_tiles(request):
 
 
 def top_neutral_tiles(request):
-    tiles = Tile.objects.filter(n_po_count__gt=0).order_by('-n_po_count')[:60]
+    tiles = Tile.objects.filter(n_po_count__gt=0) \
+        .order_by('-n_po_count')[:140]
     result = []
     checker = {}
     for t in tiles:
