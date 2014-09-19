@@ -80,6 +80,7 @@ def get_entities():
     count_info = {}
     tiles_dict = result['result']['map']
     for tile_key, value in tiles_dict.items():
+        tile_key_n = tile_key + '_n'
         if 'error' in value:
             logging.error('Error {} found for tile: {}'.format(value['error'], tile_key))
             continue
@@ -88,6 +89,8 @@ def get_entities():
             continue
 
         portal_count = 0
+        portal_count_n = 0
+        portal_in_tile = None
         print('==========' + tile_key + '========')
         entities = value['gameEntities']
         for item in entities:
@@ -103,6 +106,8 @@ def get_entities():
                 continue
             name = entity['title']
             team = entity['team']
+            if team == 'NEUTRAL':
+                portal_count_n += 1
             portal = {}
             portal['guid'] = guid
             portal['name'] = entity['title']
@@ -112,12 +117,18 @@ def get_entities():
             portal['level'] = entity['level']
             portal['image'] = entity['image']
             obj_portal = get_or_create_portal(portal)
+            if obj_portal:
+                portal_in_tile = obj_portal
             print('- ' + name + ' ' + guid + ' ' + team)
         count_info[tile_key] = portal_count
+        count_info[tile_key_n] = portal_count_n
+        count_info[tile_key + '_po'] = portal_in_tile
 
     # update last updated flag
     for tile in tiles:
         tile.portal_count = count_info.get(tile.key, 0)
+        tile.n_po_count = count_info.get(tile.key + '_n', 0)
+        tile.portal = count_info.get(tile.key + '_po', None)
         tile.save()
 
 

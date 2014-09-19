@@ -238,4 +238,6 @@ class Message(models.Model):
 class Tile(models.Model):
     key = models.CharField(max_length=40)
     portal_count = models.IntegerField(default=0)
+    n_po_count = models.IntegerField(default=0)
+    portal = models.ForeignKey('Portal', null=True, blank=True, related_name='tile_portal')
     updated = models.DateTimeField(auto_now=True)
