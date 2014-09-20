@@ -19,11 +19,12 @@
         <tr>
             <th>No.</th>
             <th>Portal</th>
-            {% if neutral %}
-            <th>Neutral Portal Count</th>
-            {% else %}
+        {% if neutral %}
+            <th>Neutral Count</th>
+            <th>Action</th>
+        {% else %}
             <th>Portal Count</th>
-            {% endif %}
+        {% endif %}
         </tr>
         </thead>
         <tbody>
@@ -44,6 +45,11 @@
                     {{ tile.portal_count }}
                 {% endif %}
             </td>
+            {% if neutral %}
+            <td>
+                <a class="external" target="_blank" href="{{ tile.portal.get_ingress_url }}">Check on Ingress Intel</a>
+            </td>
+            {% endif %}
         </tr>
         {% endfor %}
         </tbody>

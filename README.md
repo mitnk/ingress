@@ -2,6 +2,12 @@ Ingress Intel for Your City
 ===========================
 
 
+This Project Has Stoped
+-----------------------
+
+Due to violating TOS of Ingress and Hello from NianticOps.
+
+
 Rules You Should Follow When Using this Project
 -----------------------------------------------
 
