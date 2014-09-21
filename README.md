@@ -104,9 +104,3 @@ python3.4 manage.py runserver 8080
 Open browser to see `http://127.0.0.1:8080/`
 
 8) Use `python3.4 manage.py help` to see other ingress commands.
-
-
-Existing Sites
---------------
-
-Ingress Beijing China - [http://ingress.mitnk.com](http://ingress.mitnk.com)
